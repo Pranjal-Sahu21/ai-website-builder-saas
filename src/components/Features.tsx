@@ -2,18 +2,13 @@ const Features = () => {
   return (
     <section
       className="bg-black py-20 px-4
-        bg-[radial-gradient(rgba(166,255,93,0.15)_2px,transparent_0)]
-        bg-size-[40px_40px]
-        bg-position-[-2px_-2px]"
+        bg-[radial-gradient(rgba(166,255,93,0.15)_1.5px,transparent_0)]
+        bg-size-[20px_20px]
+        bg-position-[-1px_-1px]"
     >
       <div className="flex items-center flex-col justify-center text-center">
-        {/* Badge */}
-        <div className="bg-neutral-900 text-xs font-medium border border-white/20 text-white px-6 py-2.5 rounded-full">
-          Our core features
-        </div>
-
         {/* Heading */}
-        <h2 className="text-white font-medium text-4xl md:text-[40px] mt-6">
+        <h2 className="text-white text-4xl md:text-[40px] mt-6">
           Built for <span className="text-[#A6FF5D] italic">Speed</span>
         </h2>
 

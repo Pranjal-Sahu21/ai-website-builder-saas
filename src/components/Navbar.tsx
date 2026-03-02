@@ -7,7 +7,7 @@ const Navbar = () => {
     <nav
       className="fixed top-0 z-20 w-full h-20 
         flex flex-col items-center justify-center
-        bg-black/10 backdrop-blur-xl  
+        bg-black/10 backdrop-blur-3xl  
         "
     >
       {" "}
@@ -17,13 +17,13 @@ const Navbar = () => {
         </a>
 
         <div
-          className={`max-md:fixed max-md:top-0 max-md:z-10 max-md:left-0 max-md:transition-all max-md:duration-300 max-md:overflow-hidden max-md:h-screen max-md:bg-black/75 max-md:backdrop-blur max-md:flex-col max-md:justify-center flex items-center gap-8 text-lg md:text-sm ${
+          className={`max-md:fixed max-md:top-0 max-md:z-10 max-md:left-0 max-md:transition-all max-md:duration-300 max-md:overflow-hidden max-md:h-screen max-md:bg-black/95 max-md:backdrop-blur-3xl max-md:flex-col max-md:justify-center flex items-center gap-8 text-2xl uppercase md:text-sm ${
             menuOpen ? "max-md:w-full" : "max-md:w-0"
           }`}
         >
           <a
             onClick={() => setMenuOpen(false)}
-            className="text-white/80 hover:text-white/90"
+            className=" text-white/80 hover:text-white/90"
           >
             Features
           </a>
@@ -48,7 +48,7 @@ const Navbar = () => {
 
           <button
             onClick={() => setMenuOpen(false)}
-            className="md:hidden bg-gray-950 hover:bg-gray-900 text-white p-2 rounded-md aspect-square"
+            className="md:hidden border border-[#A6FF5D] text-[#A6FF5D] hover:bg-[#A6FF5D]/10 px-4 py-2 rounded-full transition"
           >
             ✕
           </button>
