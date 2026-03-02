@@ -3,6 +3,7 @@ import "./HeroSection.css";
 const HeroSection: React.FC = () => {
   return (
     <header
+    id="header"
       className="min-h-dvh bg-black text-white flex flex-col bg-cover bg-center bg-no-repeat relative"
       style={{
         backgroundImage:

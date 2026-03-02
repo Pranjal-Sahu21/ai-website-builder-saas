@@ -18,8 +18,8 @@ const Navbar = () => {
     >
       {" "}
       <div className="flex items-center justify-between p-4 md:px-16 lg:px-24 xl:px-32 md:py-4 w-full">
-        <a href="#" className="text-xl text-white flex items-center gap-2">
-          <img src={favicon} alt="logo" className="h-8 w-8" /> genixor
+        <a onClick={() => {handleClick('header')}} className="text-xl text-white flex items-center gap-2">
+          <img src={favicon} alt="logo" className="h-8 w-8" /> Genixor
         </a>
 
         <div

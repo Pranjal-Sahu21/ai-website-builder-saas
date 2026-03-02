@@ -7,6 +7,7 @@ import MyProjects from "./pages/MyProjects";
 import Home from "./pages/Home";
 import View from "./pages/View";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/community" element={<Community />} />
         <Route path="/view/:projectId" element={<View />} />
       </Routes>
+      <Footer />
     </div>
   );
 };
