@@ -1,9 +1,16 @@
 import "./HeroSection.css";
 
 const HeroSection: React.FC = () => {
+  const handleClick = (section: string) => {
+    const element = document.getElementById(section);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <header
-    id="header"
+      id="header"
       className="min-h-dvh bg-black text-white flex flex-col bg-cover bg-center bg-no-repeat relative"
       style={{
         backgroundImage:
@@ -59,6 +66,9 @@ const HeroSection: React.FC = () => {
       {/* SCROLL INDICATOR */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer">
         <svg
+          onClick={() => {
+            handleClick("features");
+          }}
           className="w-6 h-6 text-white/60"
           fill="none"
           stroke="currentColor"

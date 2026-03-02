@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import View from "./pages/View";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         />
         <Route path="/community" element={<Community />} />
         <Route path="/view/:projectId" element={<View />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </div>

@@ -1,5 +1,6 @@
 import { Twitter, Github, Linkedin, Youtube, Instagram } from "lucide-react";
 import favicon from "../assets/favicon.svg";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const handleClick = (section: string) => {
@@ -18,14 +19,9 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-6 gap-8 md:gap-12">
           {/* Logo & Description */}
           <div className="lg:col-span-3 space-y-6">
-            <a
-              onClick={() => {
-                handleClick("header");
-              }}
-              className="text-xl text-white flex items-center gap-2"
-            >
+            <Link to="/" className="text-xl text-white flex items-center gap-2">
               <img src={favicon} alt="logo" className="h-8 w-8" /> Genixor
-            </a>
+            </Link>
             <p className="text-sm text-neutral-400 max-w-96">
               Genixor helps you build AI-powered websites instantly —
               intelligent, fast, and production-ready.
@@ -33,46 +29,21 @@ const Footer = () => {
 
             {/* Social Icons */}
             <div className="flex gap-5 md:gap-6">
-              <a
-                onClick={() => {
-                  handleClick("header");
-                }}
-                className="text-white hover:text-[#A6FF5D]"
-              >
+              <Link to="/" className="hover:text-[#A6FF5D]">
                 <Twitter size={20} />
-              </a>
-              <a
-                onClick={() => {
-                  handleClick("header");
-                }}
-                className="text-white hover:text-[#A6FF5D]"
-              >
+              </Link>
+              <Link to="/" className="hover:text-[#A6FF5D]">
                 <Github size={20} />
-              </a>
-              <a
-                onClick={() => {
-                  handleClick("header");
-                }}
-                className="text-white hover:text-[#A6FF5D]"
-              >
+              </Link>
+              <Link to="/" className="hover:text-[#A6FF5D]">
                 <Linkedin size={20} />
-              </a>
-              <a
-                onClick={() => {
-                  handleClick("header");
-                }}
-                className="text-white hover:text-[#A6FF5D]"
-              >
+              </Link>
+              <Link to="/" className="hover:text-[#A6FF5D]">
                 <Youtube size={20} />
-              </a>
-              <a
-                onClick={() => {
-                  handleClick("header");
-                }}
-                className="text-white hover:text-[#A6FF5D]"
-              >
+              </Link>
+              <Link to="/" className="hover:text-[#A6FF5D]">
                 <Instagram size={20} />
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -83,34 +54,19 @@ const Footer = () => {
               <h3 className="text-sm mb-4">Products</h3>
               <ul className="space-y-3 text-sm text-neutral-400">
                 <li>
-                  <a
-                    onClick={() => {
-                      handleClick("header");
-                    }}
-                    className="hover:text-[#A6FF5D]"
-                  >
+                  <Link to="/" className="hover:text-[#A6FF5D]">
                     Components
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    onClick={() => {
-                      handleClick("header");
-                    }}
-                    className="hover:text-[#A6FF5D]"
-                  >
+                  <Link to="/" className="hover:text-[#A6FF5D]">
                     Templates
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    onClick={() => {
-                      handleClick("header");
-                    }}
-                    className="hover:text-[#A6FF5D]"
-                  >
+                  <Link to="/" className="hover:text-[#A6FF5D]">
                     Icons
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -120,34 +76,19 @@ const Footer = () => {
               <h3 className="text-sm mb-4">Resources</h3>
               <ul className="space-y-3 text-sm text-neutral-400">
                 <li>
-                  <a
-                    onClick={() => {
-                      handleClick("header");
-                    }}
-                    className="hover:text-[#A6FF5D]"
-                  >
+                  <Link to="/" className="hover:text-[#A6FF5D]">
                     Docs
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    onClick={() => {
-                      handleClick("header");
-                    }}
-                    className="hover:text-[#A6FF5D]"
-                  >
+                  <Link to="/" className="hover:text-[#A6FF5D]">
                     Blog
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    onClick={() => {
-                      handleClick("header");
-                    }}
-                    className="hover:text-[#A6FF5D]"
-                  >
+                  <Link to="/" className="hover:text-[#A6FF5D]">
                     Support
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -157,44 +98,24 @@ const Footer = () => {
               <h3 className="text-sm mb-4">Company</h3>
               <ul className="space-y-3 text-sm text-neutral-400">
                 <li>
-                  <a
-                    onClick={() => {
-                      handleClick("header");
-                    }}
-                    className="hover:text-[#A6FF5D]"
-                  >
+                  <Link to="/" className="hover:text-[#A6FF5D]">
                     About
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    onClick={() => {
-                      handleClick("header");
-                    }}
-                    className="hover:text-[#A6FF5D]"
-                  >
+                  <Link to="/" className="hover:text-[#A6FF5D]">
                     Vision
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    onClick={() => {
-                      handleClick("header");
-                    }}
-                    className="hover:text-[#A6FF5D]"
-                  >
+                  <Link to="/" className="hover:text-[#A6FF5D]">
                     Privacy policy
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    onClick={() => {
-                      handleClick("header");
-                    }}
-                    className="hover:text-[#A6FF5D]"
-                  >
+                  <Link to="/" className="hover:text-[#A6FF5D]">
                     Contact
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

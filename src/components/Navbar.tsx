@@ -1,14 +1,10 @@
 import { useState } from "react";
 import favicon from "../assets/favicon.svg";
+import { Link } from "react-router-dom";
+import useScrollToSection from "../hooks/useScrollToSection";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const handleClick = (section: string) => {
-    const element = document.getElementById(section);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-    setMenuOpen(false);
-  };
+  const scrollToSection = useScrollToSection();
   return (
     <nav
       className="fixed top-0 z-20 w-full h-20 
@@ -18,45 +14,55 @@ const Navbar = () => {
     >
       {" "}
       <div className="flex items-center justify-between p-4 md:px-16 lg:px-24 xl:px-32 md:py-4 w-full">
-        <a onClick={() => {handleClick('header')}} className="text-xl text-white flex items-center gap-2">
+        <Link to="/" className="text-xl text-white flex items-center gap-2">
           <img src={favicon} alt="logo" className="h-8 w-8" /> Genixor
-        </a>
+        </Link>
 
         <div
           className={`max-md:fixed max-md:top-0 max-md:z-10 max-md:left-0 max-md:transition-all max-md:duration-300 max-md:overflow-hidden max-md:h-screen max-md:bg-black/95 max-md:backdrop-blur-3xl max-md:flex-col max-md:justify-center flex items-center gap-8 text-2xl md:text-sm ${
             menuOpen ? "max-md:w-full" : "max-md:w-0"
           }`}
         >
-          <a
+          <Link
+            to="/"
             onClick={() => {
-              handleClick("features");
+              scrollToSection("features");
+              setMenuOpen(false);
             }}
             className=" text-white/80 hover:text-[#A6FF5D]"
           >
             Features
-          </a>
-          <a
+          </Link>
+          <Link
+            to="/"
             onClick={() => {
-              handleClick("testimonials");
+              scrollToSection("testimonials");
+              setMenuOpen(false);
             }}
             className="text-white/80 hover:text-[#A6FF5D]"
           >
             Testimonials
-          </a>
-          <a
-            onClick={() => setMenuOpen(false)}
+          </Link>
+          <Link
+            to="/"
+            onClick={() => {
+              scrollToSection("pricing");
+              setMenuOpen(false);
+            }}
             className="text-white/80 hover:text-[#A6FF5D]"
           >
             Pricing
-          </a>
-          <a
+          </Link>
+          <Link
+            to="/"
             onClick={() => {
-              handleClick("faq");
+              scrollToSection("faq");
+              setMenuOpen(false);
             }}
             className="text-white/80 hover:text-[#A6FF5D]"
           >
             FAQs
-          </a>
+          </Link>
 
           <button
             onClick={() => setMenuOpen(false)}
