@@ -3,12 +3,6 @@ import favicon from "../assets/favicon.svg";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const handleClick = (section: string) => {
-    const element = document.getElementById(section);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
   return (
     <div
       className="bg-black pt-20 bg-[radial-gradient(rgba(166,255,93,0.15)_1.5px,transparent_0)]
