@@ -4,10 +4,16 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   return (
-    <nav className="flex flex-col items-center w-full">
+    <nav
+      className="fixed top-0 z-20 w-full h-20 
+        flex flex-col items-center justify-center
+        bg-black/10 backdrop-blur-xl  
+        "
+    >
+      {" "}
       <div className="flex items-center justify-between p-4 md:px-16 lg:px-24 xl:px-32 md:py-4 w-full">
-        <a href="#" className="text-xl flex items-center gap-2">
-          <img src={favicon} alt="logo" className="h-8 w-8"/> Genixor
+        <a href="#" className="text-xl text-white flex items-center gap-2">
+          <img src={favicon} alt="logo" className="h-8 w-8" /> Genixor
         </a>
 
         <div

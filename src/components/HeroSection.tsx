@@ -4,17 +4,15 @@ import Navbar from "./Navbar";
 const HeroSection: React.FC = () => {
   return (
     <header
-      className="bg-black text-white flex flex-col items-center bg-cover bg-center bg-no-repeat pb-10"
+      className="md:min-h-dvh bg-black text-white flex flex-col items-center bg-cover bg-center bg-no-repeat pb-10"
       style={{
         backgroundImage:
           "url('https://assets.prebuiltui.com/images/components/hero-section/hero-background-image.png')",
       }}
     >
-      {/* NAVBAR */}
-      <Navbar />
       {/* BADGE */}
-      <div className="rainbow relative z-0 bg-white/15 overflow-hidden p-px flex items-center justify-center rounded-full mt-12 md:mt-24">
-        <div className="flex items-center gap-3 pl-4 pr-6 py-3 text-white rounded-full font-medium bg-gray-900/80 backdrop-blur">
+      <div className="rainbow relative z-0 bg-white/15 overflow-hidden p-px flex items-center justify-center rounded-full mt-32 md:mt-42">
+        <div className="flex items-center gap-3 pl-4 pr-6 py-3 text-white rounded-full font-medium bg-neutral-900 backdrop-blur">
           {/* Pulsing Dot */}
           <span className="relative flex h-3 w-3">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A6FF5D] opacity-75"></span>
@@ -43,7 +41,7 @@ const HeroSection: React.FC = () => {
         </button>
 
         <button className="bg-white/10 hover:bg-white/20 px-6 py-2.5 rounded-full text-sm text-white transition">
-          See How It Works
+          See Features
         </button>
       </div>
 
