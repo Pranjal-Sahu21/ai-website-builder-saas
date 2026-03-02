@@ -106,7 +106,7 @@ const Testimonials: React.FC = () => {
 
         {/* Description */}
         <p className="text-white/50 text-sm max-w-md mx-auto mt-4">
-          Real feedback from founders and teams building with AI.
+          Real feedback from people building with AI.
         </p>
 
         {/* Rows */}

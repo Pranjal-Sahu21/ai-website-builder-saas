@@ -9,7 +9,7 @@ const Features = () => {
     >
       <div className="flex items-center flex-col justify-center text-center">
         {/* Heading */}
-        <h2 className="text-white text-4xl md:text-[40px] mt-6">
+        <h2 className="text-white text-3xl md:text-4xl mt-6">
           Built for <span className="text-[#A6FF5D] italic">Speed</span>
         </h2>
 
