@@ -1,6 +1,4 @@
 import "./HeroSection.css";
-import Navbar from "./Navbar";
-
 const HeroSection: React.FC = () => {
   return (
     <header
