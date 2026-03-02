@@ -44,11 +44,8 @@ const Navbar = () => {
             Testimonials
           </Link>
           <Link
-            to="/"
-            onClick={() => {
-              scrollToSection("pricing");
-              setMenuOpen(false);
-            }}
+            to="/pricing"
+            onClick={() => setMenuOpen(false)}
             className="text-white/80 hover:text-[#A6FF5D]"
           >
             Pricing
