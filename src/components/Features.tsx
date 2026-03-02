@@ -1,6 +1,7 @@
 const Features = () => {
   return (
     <section
+    id="features"
       className="bg-black py-20 px-4
         bg-[radial-gradient(rgba(166,255,93,0.15)_1.5px,transparent_0)]
         bg-size-[20px_20px]
@@ -13,7 +14,7 @@ const Features = () => {
         </h2>
 
         {/* Description */}
-        <p className="text-sm md:text-base text-gray-300 text-center max-w-lg mt-4 px-4">
+        <p className="text-white/50 text-sm max-w-md mx-auto mt-4">
           Build and launch websites instantly with AI.
         </p>
 
@@ -29,7 +30,7 @@ const Features = () => {
               />
             </div>
 
-            <h3 className="text-lg font-medium text-white mt-8 text-left">
+            <h3 className="text-lg  text-white mt-8 text-left">
               Instant AI Generation
             </h3>
 
@@ -49,7 +50,7 @@ const Features = () => {
               />
             </div>
 
-            <h3 className="text-lg font-medium text-white mt-8 text-left">
+            <h3 className="text-lg text-white mt-8 text-left">
               Smart Customization
             </h3>
 
@@ -69,7 +70,7 @@ const Features = () => {
               />
             </div>
 
-            <h3 className="text-lg font-medium text-white mt-8 text-left">
+            <h3 className="text-lg text-white mt-8 text-left">
               One-Click Deployment
             </h3>
 

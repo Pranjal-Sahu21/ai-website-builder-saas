@@ -8,7 +8,7 @@
 }
 
 @layer base {
-  button {
+  button, a {
     @apply cursor-pointer;
   }
 }
