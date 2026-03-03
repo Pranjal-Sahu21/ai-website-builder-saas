@@ -71,7 +71,7 @@ const Navbar = () => {
 
         <button
           onClick={() => setMenuOpen(true)}
-          className="md:hidden bg-gray-950 hover:bg-gray-900 text-white p-2 rounded-md"
+          className="md:hidden bg-transparent text-white p-2 rounded-md"
         >
           ☰
         </button>
