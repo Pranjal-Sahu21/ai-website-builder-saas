@@ -46,7 +46,7 @@ const MyProjects = () => {
           </div>
 
           {/* Projects Grid */}
-          <div className="flex flex-wrap gap-9 justify-start">
+          <div className="flex flex-wrap gap-9 lg:gap-9 justify-center lg:justify-start">
             {projects.map((project) => (
               <div
                 key={project.id}
