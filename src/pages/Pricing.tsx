@@ -1,7 +1,11 @@
-import React from "react";
-import { appPlans } from "../assets/assets"; 
+import React, { useEffect } from "react";
+import { appPlans } from "../assets/assets";
 
 const Pricing: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <section
       className="bg-black py-20 px-4 bg-[radial-gradient(rgba(166,255,93,0.15)_1.5px,transparent_0)]
@@ -12,7 +16,8 @@ const Pricing: React.FC = () => {
       {/* Heading */}
       <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
         <h2 className="text-white text-3xl md:text-4xl mt-10">
-          Choose your perfect <span className="text-[#A6FF5D] italic">plan</span>
+          Choose your perfect{" "}
+          <span className="text-[#A6FF5D] italic">plan</span>
         </h2>
         <p className="text-white/50 text-sm max-w-md mx-auto mt-4">
           Plans for creators and teams to launch fast.

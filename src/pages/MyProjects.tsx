@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Project } from "../types";
-import { Loader2Icon, PlusIcon } from "lucide-react";
+import { Loader2Icon, PlusIcon, TrashIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { dummyProjects } from "../assets/assets";
 
@@ -12,6 +12,12 @@ const MyProjects = () => {
   const fetchProjects = async () => {
     setProjects(dummyProjects);
     setTimeout(() => setLoading(false), 1000);
+  };
+
+  const deleteProject = (id: string) => {
+    if (window.confirm("Are you sure you want to delete this project?")) {
+      setProjects((prev) => prev.filter((project) => project.id !== id));
+    }
   };
 
   useEffect(() => {
@@ -38,7 +44,7 @@ const MyProjects = () => {
             </h1>
             <button
               onClick={() => navigate("/")}
-              className="flex items-center gap-1.5 bg-[#A6FF5D] text-gray-900 px-4 py-2 rounded-full font-medium hover:bg-[#A6FF5D]/90 transition text-sm"
+              className="flex items-center gap-1 bg-[#A6FF5D] text-gray-900 px-4 py-2 rounded-full font-medium hover:bg-[#A6FF5D]/90 transition text-sm"
             >
               <PlusIcon size={16} />
               Create
@@ -49,8 +55,9 @@ const MyProjects = () => {
           <div className="flex flex-wrap gap-9 lg:gap-9 justify-center lg:justify-start">
             {projects.map((project) => (
               <div
+                onClick={() => navigate(`/projects/${project.id}`)}
                 key={project.id}
-                className="relative w-72 rounded-lg overflow-hidden bg-neutral-900/70 backdrop-blur border border-neutral-800 hover:border-[#A6FF5D] hover:shadow-lg transition-all duration-300 cursor-pointer"
+                className="relative group w-72 rounded-lg overflow-hidden bg-neutral-900/70 backdrop-blur border border-neutral-800 hover:border-[#A6FF5D] hover:shadow-lg transition-all duration-300 cursor-pointer"
               >
                 {/* Mini Preview */}
                 <div className="relative w-full h-40 overflow-hidden rounded-t-lg bg-neutral-800">
@@ -93,27 +100,61 @@ const MyProjects = () => {
 
                     {/* Buttons */}
                     <div className="flex gap-3 text-sm">
-                      <button className="bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-full transition text-xs ">
+                      <button
+                        onClick={() => navigate(`/preview/${project.id}`)}
+                        className="bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-full transition text-xs "
+                      >
                         Preview
                       </button>
-                      <button className="bg-[#A6FF5D] hover:bg-[#A6FF5D]/90 text-gray-900 px-3 py-1.5 rounded-full transition text-xs ">
+                      <button
+                        onClick={() => navigate(`/projects/${project.id}`)}
+                        className="bg-[#A6FF5D] hover:bg-[#A6FF5D]/90 text-gray-900 px-3 py-1.5 rounded-full transition text-xs "
+                      >
                         Open
                       </button>
                     </div>
                   </div>
+                  <TrashIcon
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      deleteProject(project.id);
+                    }}
+                    className="
+                    absolute top-3 right-3
+                    bg-neutral-900/90 backdrop-blur
+                    border border-neutral-700
+                    text-white/70
+                    hover:text-red-400
+                    hover:border-red-400/60
+                    hover:bg-red-500/10
+                    p-1.5 size-7
+                    rounded-md
+                    cursor-pointer
+                    opacity-100
+                    transition-all duration-200
+                  "
+                  />
                 </div>
               </div>
             ))}
           </div>
         </div>
       ) : (
-        <div className="flex flex-col items-start justify-center h-[80vh] gap-4">
-          <h1 className="text-2xl text-white/90">You have no projects here</h1>
+        <div className="flex flex-col items-center justify-center h-[80vh] text-center gap-6">
+          <h1 className="text-4xl sm:text-5xl text-white">
+            You have no <span className="text-[#A6FF5D] italic">projects</span>{" "}
+            yet
+          </h1>
+
+          <p className="text-white/50 text-md max-w-md">
+            Start building something amazing.
+          </p>
+
           <button
             onClick={() => navigate("/")}
-            className="bg-[#A6FF5D] text-gray-900 px-4 py-2 rounded-full font-medium hover:bg-[#A6FF5D]/90 transition text-sm"
+            className="mt-2 bg-[#A6FF5D] text-gray-900 px-6 py-2.5 rounded-full font-medium hover:bg-[#A6FF5D]/90 transition text-sm"
           >
-            Create
+            Create Project
           </button>
         </div>
       )}
