@@ -50,7 +50,6 @@ const Projects = () => {
 
   const downloadCode = () => {
     if (!project) return;
-    const element = document.createElement("a");
   };
 
   const togglePublish = async () => {
