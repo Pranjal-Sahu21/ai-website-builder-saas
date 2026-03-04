@@ -16,7 +16,6 @@ interface ProjectPreviewProps {
 const ProjectPreview = forwardRef<ProjectPreviewRef, ProjectPreviewProps>(
   (
     { project, isGenerating, device = "desktop", showEditorPanel = "true" },
-    ref,
   ) => {
     const iframeRef = useRef<HTMLIFrameElement>(null);
 
