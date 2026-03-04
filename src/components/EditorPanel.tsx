@@ -70,7 +70,7 @@ const EditorPanel = ({
       shadow-[0_0_40px_rgba(0,0,0,0.8)]
       p-5
       z-50
-      animate-in fade-in slide-in-from-right-5
+      animate-fade-in fade-in slide-in-from-right-5
     "
     >
       {/* Header */}

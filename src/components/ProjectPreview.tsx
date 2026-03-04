@@ -1,7 +1,14 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import type { Project } from "../types";
 import { iframeScript } from "../assets/assets";
 import EditorPanel from "./EditorPanel";
+import LoaderSteps from "./LoaderSteps";
 
 export interface ProjectPreviewRef {
   getCode: () => string | undefined;
@@ -15,7 +22,10 @@ interface ProjectPreviewProps {
 }
 
 const ProjectPreview = forwardRef<ProjectPreviewRef, ProjectPreviewProps>(
-  ({ project, isGenerating, device = "desktop", showEditorPanel = "true" },) => {
+  (
+    { project, isGenerating, device = "desktop", showEditorPanel = "true" },
+    ref,
+  ) => {
     const [selectedElement, setSelectedElement] = useState<any>(null);
 
     const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -25,6 +35,32 @@ const ProjectPreview = forwardRef<ProjectPreviewRef, ProjectPreviewProps>(
       tablet: "w-[768px]",
       desktop: "w-full",
     };
+
+    useImperativeHandle(ref, () => ({
+      getCode: () => {
+        const doc = iframeRef.current?.contentDocument;
+        if (!doc) return undefined;
+
+        // Remove selection class
+        doc
+          .querySelectorAll(".ai-selected-element,[data-ai-selected]")
+          .forEach((e1) => {
+            e1.classList.remove("ai-selected-element");
+            e1.removeAttribute("data-ai-selected");
+            (e1 as HTMLElement).style.outline = "";
+          });
+
+        // Remove injected style + script
+        const previewStyle = doc.getElementById("ai-preview-style");
+        if (previewStyle) previewStyle.remove();
+        const previewScript = doc.getElementById("ai-preview-script");
+        if (previewScript) previewScript.remove();
+
+        //Serialize clean HTML
+        const html = doc.documentElement.outerHTML;
+        return html;
+      },
+    }));
 
     const injectPreview = (html: string) => {
       if (!html) return "";
@@ -95,8 +131,8 @@ const ProjectPreview = forwardRef<ProjectPreviewRef, ProjectPreviewProps>(
           </>
         ) : (
           isGenerating && (
-            <div className="flex items-center justify-center h-full text-white/50">
-              Loading...
+            <div className="fixed inset-0 z-50">
+              <LoaderSteps />
             </div>
           )
         )}

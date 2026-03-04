@@ -55,3 +55,16 @@
   scrollbar-width: thin;
   scrollbar-color: rgba(166, 255, 93, 0.6) #0a0a0a;
 }
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
