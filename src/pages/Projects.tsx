@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import type { Project } from "../types";
 import {
@@ -14,8 +14,15 @@ import {
   EyeOffIcon,
   EyeIcon,
 } from "lucide-react";
-import { dummyConversations, dummyProjects, dummyVersion } from "../assets/assets";
+import {
+  dummyConversations,
+  dummyProjects,
+  dummyVersion,
+} from "../assets/assets";
 import Sidebar from "../components/Sidebar";
+import ProjectPreview, {
+  type ProjectPreviewRef,
+} from "../components/ProjectPreview";
 
 const Projects = () => {
   const { projectId } = useParams();
@@ -31,12 +38,18 @@ const Projects = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
+  const previewRef = useRef<ProjectPreviewRef>(null);
+
   const fetchProject = async () => {
     setLoading(true);
     const project = dummyProjects.find((p) => p.id === projectId) || null;
     setTimeout(() => {
       if (project) {
-        setProject({...project, conversation: dummyConversations, versions: dummyVersion});
+        setProject({
+          ...project,
+          conversation: dummyConversations,
+          versions: dummyVersion,
+        });
         setLoading(false);
         setIsGenerating(project.current_code ? false : true);
       }
@@ -189,9 +202,22 @@ const Projects = () => {
       {/* Content Area */}
       <div className="flex-1 flex overflow-auto">
         {/* Sidebar */}
-          <Sidebar isMenuOpen={isMenuOpen} project={project} setProject={setProject} isGenerating={isGenerating} setIsGenerating={setIsGenerating} />
+        <Sidebar
+          isMenuOpen={isMenuOpen}
+          project={project}
+          setProject={setProject}
+          isGenerating={isGenerating}
+          setIsGenerating={setIsGenerating}
+        />
         {/* Project preview */}
-        <div className="flex-1 p-2 pl-0">Project preview</div>
+        <div className="flex-1 p-2 pl-0">
+          <ProjectPreview
+            ref={previewRef}
+            project={project}
+            isGenerating={isGenerating}
+            device={device}
+          />
+        </div>
       </div>
     </div>
   ) : (

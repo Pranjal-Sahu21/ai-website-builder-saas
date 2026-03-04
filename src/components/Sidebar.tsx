@@ -22,6 +22,7 @@ const Sidebar = ({
   project,
   setProject,
   isGenerating,
+  setIsGenerating,
 }: SidebarProps) => {
   const messageRef = useRef<HTMLDivElement>(null);
 
@@ -37,6 +38,15 @@ const Sidebar = ({
         current_version_index: version.id,
       });
     }
+  };
+
+  const handleRevisions = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!project) return;
+    setIsGenerating(true);
+    setTimeout(() => {
+      setIsGenerating(false);
+    }, 2000);
   };
 
   useEffect(() => {
@@ -148,11 +158,16 @@ const Sidebar = ({
           {/* Generating */}
           {isGenerating && (
             <div className="flex items-start gap-3">
-              <div className="flex items-center justify-center rounded-full bg-[#A6FF5D] h-7 w-7">
+              {/* Bot Avatar */}
+              <div className="flex items-center justify-center rounded-full bg-[#A6FF5D] h-7 w-7 shadow-[0_0_15px_rgba(166,255,93,0.35)]">
                 <BotIcon className="size-4 text-gray-900" />
               </div>
-              <div className="max-w-[80%] px-4 py-2.5 rounded-2xl rounded-bl-none text-sm bg-white/5 border border-neutral-800 animate-pulse">
-                Generating code...
+
+              {/* Typing Bubble */}
+              <div className="max-w-[80%] px-4 py-3 rounded-2xl rounded-bl-none bg-white/5 border border-neutral-800 flex items-center gap-1">
+                <span className="w-2 h-2 bg-[#A6FF5D] rounded-full animate-bounce [animation-delay:-0.3s]" />
+                <span className="w-2 h-2 bg-[#A6FF5D] rounded-full animate-bounce [animation-delay:-0.15s]" />
+                <span className="w-2 h-2 bg-[#A6FF5D] rounded-full animate-bounce" />
               </div>
             </div>
           )}
@@ -161,7 +176,10 @@ const Sidebar = ({
         </div>
 
         {/* Input Area */}
-        <form className="relative p-4 border-t border-neutral-800 bg-neutral-900/70 backdrop-blur">
+        <form
+          onSubmit={handleRevisions}
+          className="relative p-4 border-t border-neutral-800 bg-neutral-900/70 backdrop-blur"
+        >
           <textarea
             onChange={(e) => setInput(e.target.value)}
             value={input}
