@@ -39,7 +39,7 @@ const HeroSection: React.FC = () => {
         </h1>
 
         {/* DESCRIPTION */}
-        <p className="text-sm md:text-base text-gray-300 max-w-lg mt-6">
+        <p className="text-sm md:text-base text-white/70 max-w-lg mt-6">
           Describe your vision and let AI generate a complete, ready-to-launch
           website tailored to your brand and goals.
         </p>

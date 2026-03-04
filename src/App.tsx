@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import PreviewPage from "./pages/PreviewPage";
 import Community from "./pages/Community";
 import Pricing from "./pages/Pricing";
@@ -11,9 +11,16 @@ import Footer from "./components/Footer";
 import NotFound from "./pages/NotFound";
 
 const App = () => {
+  const { pathname } = useLocation();
+
+  const heightNavbar =
+    (pathname.startsWith("/projects/") && pathname !== "/projects") ||
+    pathname.startsWith("/view/") ||
+    pathname.startsWith("/preview/");
+
   return (
     <div>
-      <Navbar />
+      {!heightNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/pricing" element={<Pricing />} />
@@ -28,7 +35,7 @@ const App = () => {
         <Route path="/view/:projectId" element={<View />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer />
+      {!heightNavbar && <Footer />}
     </div>
   );
 };
