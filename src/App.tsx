@@ -9,6 +9,7 @@ import View from "./pages/View";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import NotFound from "./pages/NotFound";
+import LoginPage from "./pages/LoginPage";
 
 const App = () => {
   const { pathname } = useLocation();
@@ -16,7 +17,8 @@ const App = () => {
   const heightNavbar =
     (pathname.startsWith("/projects/") && pathname !== "/projects") ||
     pathname.startsWith("/view/") ||
-    pathname.startsWith("/preview/");
+    pathname.startsWith("/preview/") ||
+    pathname.startsWith("/login");
 
   return (
     <div>
@@ -25,6 +27,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/projects" element={<MyProjects />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/projects/:projectId" element={<Projects />} />
         <Route path="/preview/:projectId" element={<PreviewPage />} />
         <Route
