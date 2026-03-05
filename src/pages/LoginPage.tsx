@@ -9,7 +9,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
 
   return (
-    <div className="relative min-h-screen flex bg-black text-white overflow-hidden">
+    <div className="relative min-h-screen flex bg-black text-white z-10 overflow-hidden">
       {/* GRID BACKGROUND */}
       <div
         className="
@@ -22,7 +22,7 @@ const LoginPage = () => {
       <div className="absolute -top-50 left-[20%] w-175 h-175 bg-[#A6FF5D]/10 blur-[160px] rounded-full" />
       <div className="relative z-10 flex w-full">
         {/* LEFT SIDE */}
-        <div className="hidden lg:flex flex-col justify-center px-20 w-1/2 relative mt-14">
+        <div className="hidden lg:flex flex-col justify-center px-20 lg:w-1/2 mt-14">
           <h1 className="text-5xl leading-tight">
             Build web apps <br />
             with <span className="text-[#A6FF5D] italic">AI</span>
@@ -63,7 +63,7 @@ const LoginPage = () => {
           </div>
         </div>
         {/* FORM SIDE */}
-        <div className="flex flex-1 items-center justify-center px-6">
+        <div className="flex w-full lg:w-1/2 items-center justify-center px-6">
           {/* PERSPECTIVE WRAPPER */}
           <div className="perspective-distant w-full max-w-md">
             {/* FLIP CONTAINER */}
