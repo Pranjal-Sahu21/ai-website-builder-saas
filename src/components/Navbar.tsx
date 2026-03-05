@@ -34,6 +34,22 @@ const Navbar = () => {
             Features
           </Link>
           <Link
+            to="/community"
+            onClick={() => {
+              setMenuOpen(false);
+            }}
+            className=" text-white/80 hover:text-[#A6FF5D]"
+          >
+            Community
+          </Link>
+          <Link
+            to="/pricing"
+            onClick={() => setMenuOpen(false)}
+            className="text-white/80 hover:text-[#A6FF5D]"
+          >
+            Pricing
+          </Link>
+          <Link
             to="/"
             onClick={() => {
               scrollToSection("testimonials");
@@ -42,13 +58,6 @@ const Navbar = () => {
             className="text-white/80 hover:text-[#A6FF5D]"
           >
             Testimonials
-          </Link>
-          <Link
-            to="/pricing"
-            onClick={() => setMenuOpen(false)}
-            className="text-white/80 hover:text-[#A6FF5D]"
-          >
-            Pricing
           </Link>
           <Link
             to="/"

@@ -179,7 +179,6 @@ const Projects = () => {
 
           {/* Preview */}
           <Link
-            target="_blank"
             to={`/preview/${projectId}`}
             className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-1.5 rounded-full text-xs transition"
           >

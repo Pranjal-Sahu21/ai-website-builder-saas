@@ -21,6 +21,7 @@ const MyProjects = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchProjects();
   }, []);
 

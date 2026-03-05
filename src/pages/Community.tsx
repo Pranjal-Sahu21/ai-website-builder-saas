@@ -15,6 +15,7 @@ const Community = () => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchProjects();
   }, []);
 
