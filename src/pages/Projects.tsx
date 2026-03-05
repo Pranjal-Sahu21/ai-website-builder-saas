@@ -89,8 +89,12 @@ const Projects = () => {
   if (loading) {
     return (
       <>
-        <div className="flex items-center justify-center h-screen">
-          <Loader2Icon className="animate-spin text-[#A6FF5D] w-10 h-10" />
+        <div className="h-screen flex flex-col items-center justify-center bg-black text-white">
+          <Loader2Icon className="size-10 animate-spin text-[#A6FF5D]" />
+
+          <p className="mt-4 text-md text-white/60 tracking-wide">
+            Loading project...
+          </p>
         </div>
       </>
     );

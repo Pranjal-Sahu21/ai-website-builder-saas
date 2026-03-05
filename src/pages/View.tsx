@@ -1,7 +1,57 @@
-const View = () => {
-  return (
-    <div>View</div>
-  )
-}
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { dummyProjects } from "../assets/assets";
+import { Loader2Icon } from "lucide-react";
+import ProjectPreview from "../components/ProjectPreview";
+import type { Project } from "../types";
 
-export default View
+const View = () => {
+  const { projectId } = useParams();
+  const [code, setCode] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  const fetchCode = async () => {
+    const projectCode = dummyProjects.find(
+      (project) => project.id === projectId,
+    )?.current_code;
+
+    setTimeout(() => {
+      if (projectCode) {
+        setCode(projectCode);
+      }
+      setLoading(false);
+    }, 2000);
+  };
+
+  useEffect(() => {
+    fetchCode();
+  }, [projectId]);
+
+  if (loading) {
+    return (
+      <div className="h-screen flex flex-col items-center justify-center bg-black text-white">
+        <Loader2Icon className="size-10 animate-spin text-[#A6FF5D]" />
+
+        <p className="mt-4 text-md text-white/60 tracking-wide">
+          Loading project preview...
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-black p-6 flex items-center justify-center">
+      <div className="w-full h-[90vh] border border-neutral-800 rounded-xl overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.7)]">
+        {code && (
+          <ProjectPreview
+            project={{ current_code: code } as Project}
+            isGenerating={false}
+            showEditorPanel={false}
+          />
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default View;

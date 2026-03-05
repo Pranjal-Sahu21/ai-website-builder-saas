@@ -32,8 +32,12 @@ const MyProjects = () => {
       bg-position-[-1px_-1px]"
     >
       {loading ? (
-        <div className="flex items-center justify-center h-[80vh]">
-          <Loader2Icon className="animate-spin text-[#A6FF5D] w-10 h-10" />
+        <div className="h-[80vh] flex flex-col items-center justify-center bg-transparent text-white">
+          <Loader2Icon className="size-10 animate-spin text-[#A6FF5D]" />
+
+          <p className="mt-4 text-md text-white/60 tracking-wide">
+            Loading your projects...
+          </p>
         </div>
       ) : projects.length > 0 ? (
         <div className="py-10 min-h-[80vh]">
