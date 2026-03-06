@@ -28,7 +28,6 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/pricing" element={<Pricing />} />
-        <Route path="/projects" element={<MyProjects />} />
         <Route path="/login" element={<LoginPage />} />
         <Route
             path="/generate"
@@ -38,12 +37,38 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-        <Route path="/projects/:projectId" element={<Projects />} />
-        <Route path="/preview/:projectId" element={<PreviewPage />} />
         <Route
-          path="/preview/:projectId/:versionId"
-          element={<PreviewPage />}
-        />
+            path="/projects"
+            element={
+              <ProtectedRoute>
+                <MyProjects />
+              </ProtectedRoute>
+            }
+          />
+        <Route
+            path="/projects/:projectId"
+            element={
+              <ProtectedRoute>
+                <Projects />
+              </ProtectedRoute>
+            }
+          />
+        <Route
+            path="/preview/:projectId"
+            element={
+              <ProtectedRoute>
+                <PreviewPage />
+              </ProtectedRoute>
+            }
+          />
+        <Route
+            path="/preview/:projectId/:versionId"
+            element={
+              <ProtectedRoute>
+                <PreviewPage />
+              </ProtectedRoute>
+            }
+          />
         <Route path="/community" element={<Community />} />
         <Route path="/view/:projectId" element={<View />} />
         <Route path="*" element={<NotFound />} />
