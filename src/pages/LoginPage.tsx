@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { LogIn, UserPlus } from "lucide-react";
+import { Navigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [isSignup, setIsSignup] = useState(false);
+  const login = false;
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  if (login) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <div className="relative min-h-screen flex bg-black text-white overflow-hidden">
