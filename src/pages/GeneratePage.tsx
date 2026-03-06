@@ -16,7 +16,7 @@ export default function GeneratePage() {
     <div
       className="relative -mb-20 min-h-screen flex items-center justify-center px-6 bg-black text-white overflow-hidden
         bg-[linear-gradient(rgba(166,255,93,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(166,255,93,0.08)_1px,transparent_1px)]
-        bg-size-[40px_40px]"
+        bg-size-[50px_50px]"
     >
       {/* ACCENT LIGHTING */}
       <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-175 h-175 bg-[#A6FF5D]/10 blur-[160px] rounded-full"></div>

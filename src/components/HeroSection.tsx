@@ -53,7 +53,7 @@ const HeroSection: React.FC = () => {
         {/* BUTTONS */}
         <div className="flex min-[375px]:flex-row flex-col gap-3 mt-8 w-[90%] max-w-md justify-center">
           <button
-            onClick={() => navigate(login ? "/" : "/login")}
+            onClick={() => navigate(login ? "/generate" : "/login")}
             className="bg-[#A6FF5D] hover:bg-[#A6FF5D]/90 text-gray-900 px-6 py-2.5 rounded-full text-sm transition w-full min-[375px]:w-auto"
           >
             Generate website
