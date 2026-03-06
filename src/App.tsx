@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import NotFound from "./pages/NotFound";
 import LoginPage from "./pages/LoginPage";
+import GeneratePage from "./pages/GeneratePage";
 
 const App = () => {
   const { pathname } = useLocation();
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/projects" element={<MyProjects />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/generate" element={<GeneratePage />} />
         <Route path="/projects/:projectId" element={<Projects />} />
         <Route path="/preview/:projectId" element={<PreviewPage />} />
         <Route
