@@ -41,7 +41,7 @@ const View = () => {
 
   return (
     <div className="min-h-screen bg-black flex items-center justify-center">
-      <div className="w-full h-screen border border-neutral-800 rounded-xl overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.7)]">
+      <div className="w-full h-screen border border-neutral-800 overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.7)]">
         {code && (
           <ProjectPreview
             project={{ current_code: code } as Project}

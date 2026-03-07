@@ -99,7 +99,7 @@ const ProjectPreview = forwardRef<ProjectPreviewRef, ProjectPreviewProps>(
     }, []);
 
     return (
-      <div className="relative flex-1 h-full rounded-xl overflow-hidden">
+      <div className="relative flex-1 h-full overflow-hidden">
         {project.current_code ? (
           <>
             <iframe

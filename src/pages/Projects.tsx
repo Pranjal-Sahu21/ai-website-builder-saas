@@ -289,7 +289,7 @@ const Projects = () => {
           setIsGenerating={setIsGenerating}
         />
         {/* Project preview */}
-        <div className="flex-1 p-2 sm:pl-0 relative z-0">
+        <div className="flex-1 sm:pl-0 relative z-0">
           {" "}
           <ProjectPreview
             ref={previewRef}

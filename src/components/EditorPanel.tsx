@@ -63,14 +63,18 @@ const EditorPanel = ({
   return (
     <div
       className="
-      absolute top-6 right-6 w-80
-      rounded-2xl
-      bg-black
-      border border-neutral-800
-      shadow-[0_0_40px_rgba(0,0,0,0.8)]
-      p-5
-      z-50
-      animate-fade-in fade-in slide-in-from-right-5
+    absolute
+    top-2 right-1/2 translate-x-1/2
+    sm:right-2 sm:translate-x-0
+    w-[92vw] sm:w-80 max-w-[320px]
+    max-h-[90vh] overflow-y-auto
+    rounded-2xl
+    bg-black
+    border border-neutral-800
+    shadow-[0_0_40px_rgba(0,0,0,0.8)]
+    p-5
+    z-50
+    animate-fade-in fade-in slide-in-from-right-5
     "
     >
       {/* Header */}
