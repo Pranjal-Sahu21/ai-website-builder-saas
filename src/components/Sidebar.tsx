@@ -58,11 +58,15 @@ const Sidebar = ({
   return (
     <div
       className={`
-        ${isMenuOpen ? "max-sm:w-0 max-sm:opacity-0 max-sm:pointer-events-none" : "w-full"}
-        h-full sm:max-w-sm
-        bg-neutral-900/60 backdrop-blur-xl
-        border-l border-neutral-800
-        transition-all duration-300
+      fixed sm:relative
+      top-16 sm:top-0
+      left-0
+      h-[calc(100vh-4rem)] sm:h-auto
+      w-full sm:w-85
+      bg-neutral-950 border-r border-neutral-800
+      transform transition-transform duration-300
+      z-10
+      ${isMenuOpen ? "translate-x-0" : "-translate-x-full sm:translate-x-0"}
       `}
     >
       <div className="flex flex-col h-full">

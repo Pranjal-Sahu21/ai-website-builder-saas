@@ -4,7 +4,6 @@ import type { Project } from "../types";
 import {
   Loader2Icon,
   MessageSquareIcon,
-  XIcon,
   SmartphoneIcon,
   TabletIcon,
   MonitorIcon,
@@ -13,6 +12,7 @@ import {
   DownloadIcon,
   EyeOffIcon,
   EyeIcon,
+  MoreVerticalIcon,
 } from "lucide-react";
 import {
   dummyConversations,
@@ -37,9 +37,11 @@ const Projects = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [actionsOpen, setActionsOpen] = useState(false);
 
   const previewRef = useRef<ProjectPreviewRef>(null);
 
+  // Fetch project
   const fetchProject = async () => {
     setLoading(true);
     const project = dummyProjects.find((p) => p.id === projectId) || null;
@@ -56,9 +58,16 @@ const Projects = () => {
     }, 2000);
   };
 
+  // Save Project
   const saveProject = async () => {
     if (!project) return;
     setIsSaving(true);
+    setTimeout(() => {
+      setIsSaving(false);
+      setTimeout(() => {
+        window.alert("Saved successfully!");
+      }, 100);
+    }, 2000);
   };
 
   //Download Code
@@ -77,6 +86,7 @@ const Projects = () => {
     element.click();
   };
 
+  // Toggle publish
   const togglePublish = async () => {
     if (!project) return;
     setProject({ ...project, isPublished: !project.isPublished });
@@ -103,12 +113,12 @@ const Projects = () => {
   return project ? (
     <div
       className="flex flex-col h-screen w-full text-white bg-black
-    bg-[radial-gradient(rgba(166,255,93,0.15)_1.5px,transparent_0)]
-    bg-size-[20px_20px]
-    bg-position-[-1px_-1px]"
+      bg-[radial-gradient(rgba(166,255,93,0.15)_1.5px,transparent_0)]
+      bg-size-[20px_20px]
+      bg-position-[-1px_-1px]"
     >
       {/* Top Bar */}
-      <div className="relative flex items-center justify-between px-6 py-4 backdrop-blur bg-neutral-900/60 border-b border-neutral-800">
+      <div className="relative flex items-center justify-between px-6 py-4 backdrop-blur bg-neutral-900/60 border-b border-neutral-800 z-100">
         {" "}
         {/* LEFT */}
         <div className="flex items-center gap-4">
@@ -125,24 +135,9 @@ const Projects = () => {
               Previewing last saved version
             </p>
           </div>
-
-          {/* Mobile Chat Toggle */}
-          <div className="sm:hidden ml-2">
-            {isMenuOpen ? (
-              <XIcon
-                className="size-6 cursor-pointer text-white/70 hover:text-[#A6FF5D] transition"
-                onClick={() => setIsMenuOpen(false)}
-              />
-            ) : (
-              <MessageSquareIcon
-                className="size-6 cursor-pointer text-white/70 hover:text-[#A6FF5D] transition"
-                onClick={() => setIsMenuOpen(true)}
-              />
-            )}
-          </div>
         </div>
         {/* CENTER - Device Toggle */}
-        <div className="absolute left-1/2 -translate-x-1/2 hidden sm:flex items-center gap-1 bg-white/5 border border-neutral-800 rounded-full p-1">
+        <div className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-1 bg-white/5 border border-neutral-800 rounded-full p-1">
           {[
             { type: "phone", icon: SmartphoneIcon },
             { type: "tablet", icon: TabletIcon },
@@ -161,41 +156,37 @@ const Projects = () => {
             </button>
           ))}
         </div>
-        {/* RIGHT - Action Buttons */}
-        <div className="flex items-center gap-3">
-          {/* Save */}
+        {/* RIGHT - Desktop Buttons */}
+        <div className="hidden lg:flex items-center gap-3">
           <button
             onClick={saveProject}
             disabled={isSaving}
-            className="flex items-center gap-2 bg-[#A6FF5D] text-gray-900 px-4 py-1.5 rounded-full text-xs hover:bg-[#A6FF5D]/90 transition disabled:cursor-not-allowed"
+            className="flex items-center gap-2 bg-[#A6FF5D] text-gray-900 px-4 py-1.5 rounded-full text-xs"
           >
             {isSaving ? (
-              <Loader2Icon className="animate-spin text-gray-900" size={16} />
+              <Loader2Icon className="animate-spin" size={16} />
             ) : (
               <SaveIcon size={14} />
             )}
             Save
           </button>
 
-          {/* Preview */}
           <Link
             to={`/preview/${projectId}`}
-            className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-1.5 rounded-full text-xs transition"
+            className="flex items-center gap-2 bg-white/10 px-4 py-1.5 rounded-full text-xs"
           >
             <FullscreenIcon size={14} />
             Preview
           </Link>
 
-          {/* Download */}
           <button
             onClick={downloadCode}
-            className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-1.5 rounded-full text-xs transition"
+            className="flex items-center gap-2 bg-white/10 px-4 py-1.5 rounded-full text-xs"
           >
             <DownloadIcon size={14} />
             Download
           </button>
 
-          {/* Publish / Unpublish */}
           <button
             onClick={togglePublish}
             className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs transition ${
@@ -212,6 +203,79 @@ const Projects = () => {
             {project.isPublished ? "Unpublish" : "Publish"}
           </button>
         </div>
+        {/* Mobile Controls */}
+        <div className="flex items-center gap-4 lg:hidden">
+          {/* Chat Toggle */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsMenuOpen(!isMenuOpen);
+              setActionsOpen(false);
+            }}
+            className="text-white/70 hover:text-[#A6FF5D] sm:hidden"
+          >
+            <MessageSquareIcon size={22} />
+          </button>
+
+          {/* Actions Menu */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setActionsOpen(!actionsOpen);
+            }}
+            className="text-white/70 hover:text-[#A6FF5D] lg:hidden"
+          >
+            <MoreVerticalIcon size={22} />
+          </button>
+        </div>
+        {actionsOpen && (
+          <div className="lg:hidden absolute text-sm top-16 right-4 bg-neutral-900 border border-neutral-800 rounded-xl p-2 flex flex-col gap-1 z-100 animate-fade-in fade-in">
+            <button
+              onClick={saveProject}
+              className="flex items-center gap-2 px-3 py-2 hover:bg-white/10 rounded-md"
+            >
+              {isSaving ? (
+                <>
+                  <Loader2Icon className="animate-spin" size={16} /> Saving...
+                </>
+              ) : (
+                <>
+                  <SaveIcon size={16} /> Save
+                </>
+              )}
+            </button>
+
+            <Link
+              to={`/preview/${projectId}`}
+              className="flex items-center gap-2 px-3 py-2 hover:bg-white/10 rounded-md"
+            >
+              <FullscreenIcon size={16} /> Preview
+            </Link>
+
+            <button
+              onClick={downloadCode}
+              className="flex items-center gap-2 px-3 py-2 hover:bg-white/10 rounded-md"
+            >
+              <DownloadIcon size={16} /> Download
+            </button>
+
+            <button
+              onClick={togglePublish}
+              className={` flex items-center justify-center px-3 py-2 gap-2 rounded-md ${
+                project.isPublished
+                  ? " text-red-400 hover:bg-red-500/20"
+                  : "text-white hover:bg-white/20"
+              }`}
+            >
+              {project.isPublished ? (
+                <EyeOffIcon size={16} />
+              ) : (
+                <EyeIcon size={16} />
+              )}
+              {project.isPublished ? "Unpublish" : "Publish"}
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Content Area */}
@@ -225,7 +289,8 @@ const Projects = () => {
           setIsGenerating={setIsGenerating}
         />
         {/* Project preview */}
-        <div className="flex-1 p-2 pl-0">
+        <div className="flex-1 p-2 sm:pl-0 relative z-0">
+          {" "}
           <ProjectPreview
             ref={previewRef}
             project={project}

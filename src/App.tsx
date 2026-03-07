@@ -30,45 +30,45 @@ const App = () => {
         <Route path="/pricing" element={<Pricing />} />
         <Route path="/login" element={<LoginPage />} />
         <Route
-            path="/generate"
-            element={
-              <ProtectedRoute>
-                <GeneratePage />
-              </ProtectedRoute>
-            }
-          />
+          path="/generate"
+          element={
+            <ProtectedRoute>
+              <GeneratePage />
+            </ProtectedRoute>
+          }
+        />
         <Route
-            path="/projects"
-            element={
-              <ProtectedRoute>
-                <MyProjects />
-              </ProtectedRoute>
-            }
-          />
+          path="/projects"
+          element={
+            <ProtectedRoute>
+              <MyProjects />
+            </ProtectedRoute>
+          }
+        />
         <Route
-            path="/projects/:projectId"
-            element={
-              <ProtectedRoute>
-                <Projects />
-              </ProtectedRoute>
-            }
-          />
+          path="/projects/:projectId"
+          element={
+            <ProtectedRoute>
+              <Projects />
+            </ProtectedRoute>
+          }
+        />
         <Route
-            path="/preview/:projectId"
-            element={
-              <ProtectedRoute>
-                <PreviewPage />
-              </ProtectedRoute>
-            }
-          />
+          path="/preview/:projectId"
+          element={
+            <ProtectedRoute>
+              <PreviewPage />
+            </ProtectedRoute>
+          }
+        />
         <Route
-            path="/preview/:projectId/:versionId"
-            element={
-              <ProtectedRoute>
-                <PreviewPage />
-              </ProtectedRoute>
-            }
-          />
+          path="/preview/:projectId/:versionId"
+          element={
+            <ProtectedRoute>
+              <PreviewPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/community" element={<Community />} />
         <Route path="/view/:projectId" element={<View />} />
         <Route path="*" element={<NotFound />} />
