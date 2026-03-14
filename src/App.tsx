@@ -13,6 +13,7 @@ import GeneratePage from "./pages/GeneratePage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "sonner";
 import AuthPage from "./pages/auth/AuthPage";
+import Settings from "./pages/Settings";
 
 const App = () => {
   const { pathname } = useLocation();
@@ -21,7 +22,8 @@ const App = () => {
     (pathname.startsWith("/projects/") && pathname !== "/projects") ||
     pathname.startsWith("/view/") ||
     pathname.startsWith("/preview/") ||
-    pathname.startsWith("/auth/");
+    pathname.startsWith("/auth/") ||
+    pathname.startsWith("/login");
 
   return (
     <div>
@@ -30,7 +32,6 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/pricing" element={<Pricing />} />
-        {/* <Route path="/login" element={<LoginPage />} /> */}
         <Route
           path="/generate"
           element={
@@ -74,6 +75,7 @@ const App = () => {
         <Route path="/community" element={<Community />} />
         <Route path="/view/:projectId" element={<View />} />
         <Route path="/auth/:pathname" element={<AuthPage />} />
+        <Route path="/account/settings" element={<Settings />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       {!heightNavbar && <Footer />}

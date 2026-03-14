@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useSession } from "@/lib/auth-client";
 
 export default function GeneratePage() {
   const [prompt, setPrompt] = useState("");
 
-  const username = "Pranjal";
+  const { data: session } = useSession();
 
+  const username = session?.user?.name;
+  
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     console.log(prompt);

@@ -9,6 +9,9 @@ const Navbar = () => {
   const scrollToSection = useScrollToSection();
 
   const { data: session } = authClient.useSession();
+
+ 
+
   return (
     <nav
       className="fixed top-0 z-20 w-full h-20 
@@ -73,12 +76,7 @@ const Navbar = () => {
             FAQs
           </Link>
           {session ? (
-            <UserButton
-              className="hidden lg:flex"
-              classNames={{
-                base: "border border-[#A6FF5D] text-[#A6FF5D] hover:bg-[#A6FF5D]/10 px-4 py-2 rounded-full transition",
-              }}
-            />
+            <UserButton className="hidden lg:flex" size="icon" />
           ) : (
             <Link
               to="/auth/sign-in"
@@ -90,12 +88,9 @@ const Navbar = () => {
         </div>
         <div className="flex lg:hidden md:gap-2">
           {session ? (
-            <UserButton
-              className="flex"
-              classNames={{
-                base: "border border-[#A6FF5D] text-[#A6FF5D]  px-4 py-2 rounded-full transition",
-              }}
-            />
+            <div className="flex justify-center items-center lg:hidden">
+              <UserButton size="icon" />
+            </div>
           ) : (
             <Link
               to="/auth/sign-in"
@@ -105,7 +100,7 @@ const Navbar = () => {
             </Link>
           )}
 
-          <div className="md:fixed md:top-6 md:right-2 z-50">
+          <div className="md:fixed md:top-5 md:right-2 z-50">
             <button
               onClick={() => setMenuOpen(true)}
               className={`${menuOpen ? "hidden" : ""} lg:hidden hover:bg-[#A6FF5D]/10 px-4 py-2 rounded-full transition`}

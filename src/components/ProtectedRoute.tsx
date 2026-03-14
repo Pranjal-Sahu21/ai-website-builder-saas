@@ -1,3 +1,4 @@
+import { authClient } from "@/lib/auth-client";
 import type { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 
@@ -6,9 +7,9 @@ type ProtectedRouteProps = {
 };
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const login = false; 
+  const { data: session } = authClient.useSession();
 
-  if (!login) {
+  if (!session) {
     return <Navigate to="/auth/sign-in" replace />;
   }
 
