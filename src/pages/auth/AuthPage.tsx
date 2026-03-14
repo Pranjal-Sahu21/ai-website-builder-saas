@@ -19,7 +19,7 @@ export default function AuthPage() {
   const { pathname } = useParams();
 
   return (
-    <div className="relative min-h-screen flex bg-black text-white overflow-hidden -mb-20">
+    <div className="relative min-h-screen flex bg-black text-white overflow-hidden">
       {/* GRID BACKGROUND */}
       <div
         className="
@@ -34,7 +34,7 @@ export default function AuthPage() {
 
       <div className="relative z-10 flex w-full">
         {/* LEFT SIDE */}
-        <div className="hidden lg:flex flex-col justify-center px-20 w-1/2 relative mt-24">
+        <div className="hidden lg:flex flex-col justify-center px-20 w-1/2 relative mt-14">
           <h1 className="text-5xl leading-tight">
             Build web apps <br />
             with <span className="text-[#A6FF5D] italic">AI</span>
@@ -65,7 +65,7 @@ export default function AuthPage() {
         </div>
 
         {/* AUTH FORM SIDE */}
-        <div className="flex flex-1 items-center justify-center sm:p-8 mt-12 ml-1 p-6 sm:ml-12">
+        <div className="flex flex-1 items-center justify-center sm:p-8 ml-1 p-6 sm:ml-12">
           <div className="w-full max-w-md">
             <AuthView
               pathname={pathname}

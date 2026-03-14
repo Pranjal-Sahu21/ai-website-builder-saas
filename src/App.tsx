@@ -21,7 +21,7 @@ const App = () => {
     (pathname.startsWith("/projects/") && pathname !== "/projects") ||
     pathname.startsWith("/view/") ||
     pathname.startsWith("/preview/") ||
-    pathname.startsWith("/login");
+    pathname.startsWith("/auth/");
 
   return (
     <div>
