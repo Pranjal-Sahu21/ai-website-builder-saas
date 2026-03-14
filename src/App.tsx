@@ -9,9 +9,10 @@ import View from "./pages/View";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import NotFound from "./pages/NotFound";
-import LoginPage from "./pages/LoginPage";
 import GeneratePage from "./pages/GeneratePage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { Toaster } from "sonner";
+import AuthPage from "./pages/auth/AuthPage";
 
 const App = () => {
   const { pathname } = useLocation();
@@ -24,11 +25,12 @@ const App = () => {
 
   return (
     <div>
+      <Toaster />
       {!heightNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/pricing" element={<Pricing />} />
-        <Route path="/login" element={<LoginPage />} />
+        {/* <Route path="/login" element={<LoginPage />} /> */}
         <Route
           path="/generate"
           element={
@@ -71,6 +73,7 @@ const App = () => {
         />
         <Route path="/community" element={<Community />} />
         <Route path="/view/:projectId" element={<View />} />
+        <Route path="/auth/:pathname" element={<AuthPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       {!heightNavbar && <Footer />}
