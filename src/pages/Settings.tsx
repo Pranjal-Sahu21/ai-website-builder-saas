@@ -17,8 +17,8 @@ const Settings = () => {
       bg-position-[-1px_-1px]"
     >
       {/* HEADER */}
-      <div className="text-center space-y-3 mt-32">
-        <h1 className="text-3xl md:text-4xl">
+      <div className="text-center space-y-3 ">
+        <h1 className="text-3xl md:text-4xl pt-32">
           Account <span className="italic text-[#a6ff5d]">Settings</span>
         </h1>
         <p className="text-white/50 text-sm max-w-md mx-auto mt-4">
