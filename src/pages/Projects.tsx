@@ -14,19 +14,18 @@ import {
   EyeIcon,
   MoreVerticalIcon,
 } from "lucide-react";
-import {
-  dummyConversations,
-  dummyProjects,
-  dummyVersion,
-} from "../assets/assets";
 import Sidebar from "../components/Sidebar";
 import ProjectPreview, {
   type ProjectPreviewRef,
 } from "../components/ProjectPreview";
+import api from "@/configs/axios.config";
+import { toast } from "sonner";
+import { useSession } from "@/lib/auth-client";
 
 const Projects = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
+  const { data: session, isPending } = useSession();
 
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
@@ -37,37 +36,41 @@ const Projects = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [isPublishing, setIsPublishing] = useState(false);
   const [actionsOpen, setActionsOpen] = useState(false);
 
   const previewRef = useRef<ProjectPreviewRef>(null);
 
   // Fetch project
   const fetchProject = async () => {
-    setLoading(true);
-    const project = dummyProjects.find((p) => p.id === projectId) || null;
-    setTimeout(() => {
-      if (project) {
-        setProject({
-          ...project,
-          conversation: dummyConversations,
-          versions: dummyVersion,
-        });
-        setLoading(false);
-        setIsGenerating(project.current_code ? false : true);
-      }
-    }, 2000);
+    try {
+      const { data } = await api.get(`/api/user/project/${projectId}`);
+      setProject(data.project);
+      setIsGenerating(!data.project.current_code);
+      setLoading(false);
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message || error.message);
+      console.log(error);
+    }
   };
 
   // Save Project
   const saveProject = async () => {
-    if (!project) return;
+    if (!previewRef.current) return;
+    const code = previewRef.current.getCode();
+    if (!code) return;
     setIsSaving(true);
-    setTimeout(() => {
+    try {
+      const { data } = await api.put(`/api/project/save/${projectId}`, {
+        code,
+      });
+      toast.success(data.message);
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message || error.message);
+      console.log(error);
+    } finally {
       setIsSaving(false);
-      setTimeout(() => {
-        window.alert("Saved successfully!");
-      }, 100);
-    }, 2000);
+    }
   };
 
   //Download Code
@@ -88,13 +91,35 @@ const Projects = () => {
 
   // Toggle publish
   const togglePublish = async () => {
-    if (!project) return;
-    setProject({ ...project, isPublished: !project.isPublished });
+    try {
+      setIsPublishing(true);
+      const { data } = await api.get(`/api/user/publish-toggle/${projectId}`);
+      setIsPublishing(false);
+      toast.success(data.message);
+      setProject((prev) =>
+        prev ? { ...prev, isPublished: !prev.isPublished } : null,
+      );
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message || error.message);
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    fetchProject();
-  }, []);
+    if (session?.user) {
+      fetchProject();
+    } else if (!isPending && !session?.user) {
+      navigate("/");
+      toast.error("Please login to view your projects");
+    }
+  }, [session?.user]);
+
+  useEffect(() => {
+    if (project && !project.current_code) {
+      const intervalId = setInterval(fetchProject, 10000);
+      return () => clearInterval(intervalId);
+    }
+  }, [project]);
 
   if (loading) {
     return (
@@ -195,7 +220,9 @@ const Projects = () => {
                 : "bg-white/10 text-white hover:bg-white/20"
             }`}
           >
-            {project.isPublished ? (
+            {isPublishing ? (
+              <Loader2Icon className="animate-spin" size={16} />
+            ) : project.isPublished ? (
               <EyeOffIcon size={14} />
             ) : (
               <EyeIcon size={14} />
@@ -267,11 +294,11 @@ const Projects = () => {
                   : "text-white hover:bg-white/20"
               }`}
             >
-              {project.isPublished ? (
-                <EyeOffIcon size={16} />
-              ) : (
-                <EyeIcon size={16} />
-              )}
+              <span>
+                {isPublishing && (
+                  <Loader2Icon className="animate-spin" size={16} />
+                )}
+              </span>
               {project.isPublished ? "Unpublish" : "Publish"}
             </button>
           </div>
