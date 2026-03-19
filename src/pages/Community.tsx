@@ -2,16 +2,24 @@ import { useEffect, useState } from "react";
 import type { Project } from "../types";
 import { Loader2Icon } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { dummyProjects } from "../assets/assets";
+import api from "@/configs/axios.config";
+import { toast } from "sonner";
 
 const Community = () => {
   const [loading, setLoading] = useState(true);
   const [projects, setProjects] = useState<Project[]>([]);
   const navigate = useNavigate();
 
+  // Fetching project function
   const fetchProjects = async () => {
-    setProjects(dummyProjects);
-    setTimeout(() => setLoading(false), 1000);
+    try {
+      const { data } = await api.get("/api/project/published");
+      setProjects(data.projects);
+      setLoading(false);
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message || error.message);
+      console.log(error);
+    }
   };
 
   useEffect(() => {
