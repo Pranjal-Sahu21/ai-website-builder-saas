@@ -10,7 +10,6 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import NotFound from "./pages/NotFound";
 import GeneratePage from "./pages/GeneratePage";
-import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "sonner";
 import AuthPage from "./pages/auth/AuthPage";
 import Settings from "./pages/Settings";
@@ -32,45 +31,13 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/pricing" element={<Pricing />} />
-        <Route
-          path="/generate"
-          element={
-            <ProtectedRoute>
-              <GeneratePage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/projects"
-          element={
-            <ProtectedRoute>
-              <MyProjects />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/projects/:projectId"
-          element={
-            <ProtectedRoute>
-              <Projects />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/preview/:projectId"
-          element={
-            <ProtectedRoute>
-              <PreviewPage />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/generate" element={<GeneratePage />} />
+        <Route path="/projects" element={<MyProjects />} />
+        <Route path="/projects/:projectId" element={<Projects />} />
+        <Route path="/preview/:projectId" element={<PreviewPage />} />
         <Route
           path="/preview/:projectId/:versionId"
-          element={
-            <ProtectedRoute>
-              <PreviewPage />
-            </ProtectedRoute>
-          }
+          element={<PreviewPage />}
         />
         <Route path="/community" element={<Community />} />
         <Route path="/view/:projectId" element={<View />} />
