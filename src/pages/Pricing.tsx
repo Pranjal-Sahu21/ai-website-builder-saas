@@ -1,7 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { appPlans } from "../assets/assets";
+import { useSession } from "@/lib/auth-client";
+import { toast } from "sonner";
+import api from "@/configs/axios.config";
 
 const Pricing: React.FC = () => {
+  const { data: session } = useSession();
+
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+
+  const handlePurchase = async (planId: string) => {
+    try {
+      if (!session?.user)
+        return toast.error("Please login to purchase credits");
+
+      setLoadingPlan(planId);
+
+      const { data } = await api.post("/api/user/purchase-credits", { planId });
+      window.location.href = data.payment_link;
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message || error.message);
+    } finally {
+      setLoadingPlan(null);
+    }
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -58,13 +81,15 @@ const Pricing: React.FC = () => {
             </ul>
 
             <button
+              onClick={() => handlePurchase(plan.id)}
               className={`w-full py-2.5 rounded-full text-sm transition ${
                 plan.id === "pro"
                   ? "bg-[#A6FF5D] text-gray-900 hover:bg-[#A6FF5D]/90"
                   : "bg-white/10 text-white hover:bg-white/20"
               }`}
+              disabled={loadingPlan === plan.id}
             >
-              Select Plan
+              {loadingPlan === plan.id ? "Processing..." : "Select Plan"}
             </button>
           </div>
         ))}

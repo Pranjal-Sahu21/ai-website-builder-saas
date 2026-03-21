@@ -13,6 +13,7 @@ import GeneratePage from "./pages/GeneratePage";
 import { Toaster } from "sonner";
 import AuthPage from "./pages/auth/AuthPage";
 import Settings from "./pages/Settings";
+import Loading from "./pages/Loading";
 
 const App = () => {
   const { pathname } = useLocation();
@@ -44,6 +45,7 @@ const App = () => {
         <Route path="/auth/:pathname" element={<AuthPage />} />
         <Route path="/account/settings" element={<Settings />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/loading" element={<Loading />} />
       </Routes>
       {!heightNavbar && <Footer />}
     </div>
