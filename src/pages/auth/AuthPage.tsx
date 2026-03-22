@@ -20,13 +20,20 @@ export default function AuthPage() {
 
   return (
     <div className="relative min-h-screen flex bg-black text-white overflow-hidden">
-      {/* GRID BACKGROUND */}
+      {/* DIAGONAL CROSS GRID BACKGROUND */}
       <div
-        className="
-        absolute inset-0
-        bg-[linear-gradient(to_right,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.08)_1px,transparent_1px)]
-        bg-size-[48px_48px]
-        "
+        className="absolute inset-0"
+        style={{
+          backgroundImage: `
+          linear-gradient(45deg, transparent 49%, rgba(255,255,255,0.08) 49%, rgba(255,255,255,0.08) 51%, transparent 51%),
+          linear-gradient(-45deg, transparent 49%, rgba(255,255,255,0.08) 49%, rgba(255,255,255,0.08) 51%, transparent 51%)
+        `,
+          backgroundSize: "50px 50px",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
+          maskImage:
+            "radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
+        }}
       />
 
       {/* ACCENT GLOW */}
@@ -79,4 +86,3 @@ export default function AuthPage() {
     </div>
   );
 }
-

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Sparkles, Loader2Icon } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSession } from "@/lib/auth-client";
@@ -10,7 +10,7 @@ export default function GeneratePage() {
   const [loading, setLoading] = useState<boolean>(false);
 
   const { data: session } = useSession();
-  const username = session?.user?.name;
+  const username = session?.user?.name || "Pranjal";
 
   const navigate = useNavigate();
 
@@ -38,14 +38,34 @@ export default function GeneratePage() {
     }
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (!session?.user) {
+      navigate("/");
+      toast("Please login to start building.");
+    }
+  }, [session?.user]);
+
   return (
-    <div
-      className="relative -mb-20 min-h-screen flex items-center justify-center px-6 bg-black text-white overflow-hidden
-      bg-[radial-gradient(rgba(166,255,93,0.15)_1.5px,transparent_0)]
-      bg-size-[20px_20px]
-      bg-position-[-1px_-1px]"
-    >
-      {/* Background Glow */}
+    <div className="relative -mb-20 min-h-screen flex items-center justify-center px-6 bg-black text-white overflow-hidden">
+      {/* TOP ACCENT GLOW (same as auth page) */}
+      <div className="absolute -top-40 left-[30%] w-175 h-175 bg-[#A6FF5D]/10 blur-[160px] rounded-full" />
+      {/* CENTER FADE GRID BACKGROUND */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: `
+          linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)
+          `,
+          backgroundSize: "40px 40px",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 60% 60% at 50% 50%, #000 30%, transparent 70%)",
+          maskImage:
+            "radial-gradient(ellipse 60% 60% at 50% 50%, #000 30%, transparent 70%)",
+        }}
+      />
+      {/* Bottom Glow */}
       <div className="absolute bottom-0 right-1/4 w-125 h-125 bg-[#A6FF5D]/5 blur-[140px] rounded-full"></div>
 
       {/* LOADING OVERLAY */}
