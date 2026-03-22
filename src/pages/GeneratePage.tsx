@@ -41,7 +41,7 @@ export default function GeneratePage() {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (!session?.user) {
-      navigate("/");
+      navigate("/auth/sign-in");
       toast("Please login to start building.");
     }
   }, [session?.user]);
@@ -49,7 +49,7 @@ export default function GeneratePage() {
   return (
     <div className="relative -mb-20 min-h-screen flex items-center justify-center px-6 bg-black text-white overflow-hidden">
       {/* TOP ACCENT GLOW (same as auth page) */}
-      <div className="absolute -top-40 left-[30%] w-175 h-175 bg-[#A6FF5D]/10 blur-[160px] rounded-full" />
+      <div className="absolute -top-40 left-[24%] w-175 h-175 bg-[#A6FF5D]/10 blur-[160px] rounded-full" />
       {/* CENTER FADE GRID BACKGROUND */}
       <div
         className="absolute inset-0 z-0"

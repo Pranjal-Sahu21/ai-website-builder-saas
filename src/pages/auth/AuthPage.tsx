@@ -1,5 +1,6 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AuthView } from "@daveyplate/better-auth-ui";
+import { ArrowUpRightFromSquare } from "lucide-react";
 
 type FeatureProps = {
   title: string;
@@ -37,7 +38,7 @@ export default function AuthPage() {
       />
 
       {/* ACCENT GLOW */}
-      <div className="absolute -top-50 left-[20%] w-175 h-175 bg-[#A6FF5D]/10 blur-[160px] rounded-full" />
+      <div className="absolute -top-50 left-0 md:left-[20%] w-175 h-175 bg-[#A6FF5D]/10 blur-[160px] rounded-full" />
 
       <div className="relative z-10 flex w-full">
         {/* LEFT SIDE */}
@@ -72,14 +73,35 @@ export default function AuthPage() {
         </div>
 
         {/* AUTH FORM SIDE */}
-        <div className="flex flex-1 items-center justify-center sm:p-8 ml-1 p-6 sm:ml-12">
-          <div className="w-full max-w-md">
-            <AuthView
-              pathname={pathname}
-              classNames={{
-                base: "bg-neutral-950 border border-[#A6FF5D]/10 rounded-2xl shadow-[0_0_80px_rgba(0,0,0,0.9)] font-light space-y-3",
-              }}
-            />
+        <div className="flex flex-1 items-center justify-center px-6 sm:px-10">
+          <div className="relative w-full max-w-md">
+            {/* Subtle Glow Behind Card */}
+            <div className="absolute inset-0 bg-[#A6FF5D]/5 blur-3xl rounded-3xl pointer-events-none" />
+
+            {/* Card */}
+            <div className="relative w-full max-w-md mx-auto flex flex-col items-center px-2 sm:px-0 space-y-5">
+              {/* Auth UI */}
+              <AuthView
+                pathname={pathname}
+                classNames={{
+                  base: "space-y-3 bg-neutral-950/80 w-full max-w-md mx-auto",
+                }}
+              />
+              {/* Divider */}
+              <div className="flex items-center gap-3">
+                <div className="h-px flex-1 bg-white/10" />
+                <span className="text-[10px] text-white/40">or</span>
+                <div className="h-px flex-1 bg-white/10" />
+              </div>
+              {/* Back Link */}
+              <Link
+                to="/"
+                className="flex items-center justify-center gap-2 text-sm text-white/60 hover:text-[#A6FF5D] transition group"
+              >
+                Back to home
+                <ArrowUpRightFromSquare className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
