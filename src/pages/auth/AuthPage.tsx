@@ -26,8 +26,8 @@ export default function AuthPage() {
         className="absolute inset-0"
         style={{
           backgroundImage: `
-          linear-gradient(45deg, transparent 49%, rgba(255,255,255,0.08) 49%, rgba(255,255,255,0.08) 51%, transparent 51%),
-          linear-gradient(-45deg, transparent 49%, rgba(255,255,255,0.08) 49%, rgba(255,255,255,0.08) 51%, transparent 51%)
+          linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)
         `,
           backgroundSize: "50px 50px",
           WebkitMaskImage:
