@@ -1,14 +1,24 @@
+import { useSession } from "@/lib/auth-client";
 import {
   AccountSettingsCards,
   ChangePasswordCard,
-  DeleteAccountCard
+  DeleteAccountCard,
 } from "@daveyplate/better-auth-ui";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const Settings = () => {
+  const { data: session } = useSession();
+  const navigate = useNavigate();
+
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    if (!session?.user) {
+      navigate("/auth/sign-in");
+      toast("Please login to change account settings.");
+    }
+  }, [session?.user]);
 
   return (
     <div

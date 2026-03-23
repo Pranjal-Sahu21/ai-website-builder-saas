@@ -95,7 +95,7 @@ const MyProjects = () => {
               <div
                 onClick={() => navigate(`/projects/${project.id}`)}
                 key={project.id}
-                className="relative group w-72 rounded-lg overflow-hidden bg-neutral-900/70 backdrop-blur border border-neutral-800 hover:border-[#A6FF5D] hover:shadow-lg transition-all duration-300 cursor-pointer"
+                className="relative group w-72 rounded-lg overflow-hidden bg-neutral-900/70 backdrop-blur border border-neutral-800 hover:border-[#A6FF5D]/40 hover:shadow-lg transition-all duration-300 cursor-pointer"
               >
                 {/* Mini Preview */}
                 <div className="relative w-full h-40 overflow-hidden rounded-t-lg bg-neutral-800">
@@ -197,7 +197,7 @@ const MyProjects = () => {
           </p>
 
           <button
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/generate")}
             className="mt-2 bg-[#A6FF5D] text-gray-900 px-6 py-2.5 rounded-full font-medium hover:bg-[#A6FF5D]/90 transition text-sm"
           >
             Create Project

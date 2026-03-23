@@ -30,11 +30,12 @@ export default function GeneratePage() {
       });
 
       navigate(`/projects/${data.projectId}`);
+
+      setLoading(false);
     } catch (error: any) {
+      setLoading(false);
       toast.error(error?.response?.data?.message || error.message);
       console.log(error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -48,7 +49,7 @@ export default function GeneratePage() {
 
   return (
     <div className="relative -mb-20 min-h-screen flex items-center justify-center px-6 bg-black text-white overflow-hidden">
-      {/* TOP ACCENT GLOW (same as auth page) */}
+      {/* TOP ACCENT GLOW */}
       <div className="absolute -top-40 left-[24%] w-175 h-175 bg-[#A6FF5D]/10 blur-[160px] rounded-full" />
       {/* CENTER FADE GRID BACKGROUND */}
       <div

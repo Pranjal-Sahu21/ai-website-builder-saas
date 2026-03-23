@@ -131,9 +131,7 @@ const ProjectPreview = forwardRef<ProjectPreviewRef, ProjectPreviewProps>(
           </>
         ) : (
           isGenerating && (
-            <div className="fixed inset-0 z-50">
               <LoaderSteps />
-            </div>
           )
         )}
       </div>
