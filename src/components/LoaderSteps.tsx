@@ -29,24 +29,41 @@ const steps = [
 ];
 
 const STEP_DURATION = 45000;
+const STORAGE_KEY = "loader-step";
 
 const LoaderSteps = () => {
-  const [current, setCurrent] = useState(0);
+  // Load from localStorage
+  const [current, setCurrent] = useState(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved ? Number(saved) : 0;
+  });
+
   const Icon = steps[current].icon;
 
+  // Step progression 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((s) => (s + 1) % steps.length);
+    if (current >= steps.length - 1) return;
+
+    const timeout = setTimeout(() => {
+      setCurrent((prev) => prev + 1);
     }, STEP_DURATION);
 
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearTimeout(timeout);
+  }, [current]);
+
+  // Persist step
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, String(current));
+  }, [current]);
+
+  useEffect(() => {
+    if (current === steps.length - 1) {
+      localStorage.removeItem(STORAGE_KEY);
+    }
+  }, [current]);
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center relative overflow-hidden bg-black text-white">
-      {/* Ambient Glow */}
-      <div className="absolute w-72 h-72 bg-[#A6FF5D]/10 rounded-full blur-3xl animate-pulse" />
-
       {/* Icon Section */}
       <div className="relative z-10 w-36 h-36 flex items-center justify-center">
         {/* Outer Glow Ring */}
