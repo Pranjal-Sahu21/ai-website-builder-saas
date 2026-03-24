@@ -10,8 +10,8 @@ export default function GeneratePage() {
   const [loading, setLoading] = useState<boolean>(false);
 
   const { data: session } = useSession();
-  const username = session?.user?.name || "Pranjal";
-
+  const username = session?.user?.name?.split(" ")[0] || "User";
+  
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -29,9 +29,9 @@ export default function GeneratePage() {
         initial_prompt: prompt,
       });
 
-      navigate(`/projects/${data.projectId}`);
-
       setLoading(false);
+
+      navigate(`/projects/${data.projectId}`);
     } catch (error: any) {
       setLoading(false);
       toast.error(error?.response?.data?.message || error.message);
@@ -50,7 +50,7 @@ export default function GeneratePage() {
   return (
     <div className="relative -mb-20 min-h-screen flex items-center justify-center px-6 bg-black text-white overflow-hidden">
       {/* TOP ACCENT GLOW */}
-      <div className="absolute -top-40 left-[24%] w-175 h-175 bg-[#A6FF5D]/10 blur-[160px] rounded-full" />
+      <div className="absolute left-[24%] w-175 h-175 bg-[#A6FF5D]/10 blur-[160px] rounded-full" />
       {/* CENTER FADE GRID BACKGROUND */}
       <div
         className="absolute inset-0 z-0"
@@ -128,7 +128,7 @@ export default function GeneratePage() {
             <button
               type="submit"
               disabled={loading}
-              className="absolute bottom-6 right-6 flex items-center justify-center bg-[#A6FF5D] text-black p-3 rounded-lg hover:brightness-110 transition disabled:opacity-50"
+              className="absolute bottom-6 right-6 flex items-center justify-center bg-[#A6FF5D] text-black p-3 rounded-lg hover:brightness-110 disabled:cursor-not-allowed transition disabled:opacity-50"
             >
               {loading ? (
                 <Loader2Icon size={18} className="animate-spin" />

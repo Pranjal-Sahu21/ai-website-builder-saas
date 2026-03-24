@@ -106,7 +106,7 @@ const Community = () => {
 
                         {/* Name */}
                         <span className="text-xs text-white/80 truncate max-w-22.5">
-                          {project.user?.name}
+                          {project.user?.name?.split(" ")[0]}
                         </span>
                       </button>
                     </div>

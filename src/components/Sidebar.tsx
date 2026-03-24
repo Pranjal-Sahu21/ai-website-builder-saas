@@ -72,9 +72,9 @@ const Sidebar = ({
       const { data } = await api.post(`/api/project/revision/${project?.id}`, {
         message: input,
       });
+      setInput("");
       fetchProject();
       toast.success(data.message);
-      setInput("");
       clearInterval(interval);
       setIsGenerating(false);
     } catch (error: any) {
