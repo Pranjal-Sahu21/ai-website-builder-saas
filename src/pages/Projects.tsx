@@ -58,7 +58,10 @@ const Projects = () => {
   const saveProject = async () => {
     if (!previewRef.current) return;
     const code = previewRef.current.getCode();
-    if (!code) return;
+    if (!code) {
+      toast.error("The code is not generated yet.");
+      return;
+    }
     setIsSaving(true);
     try {
       const { data } = await api.put(`/api/project/save/${projectId}`, {
@@ -79,6 +82,7 @@ const Projects = () => {
     const code = previewRef.current?.getCode() || project.current_code;
     if (!code) {
       if (isGenerating) return;
+      toast.error("The code is not generated yet.");
       return;
     }
     const element = document.createElement("a");
@@ -155,7 +159,10 @@ const Projects = () => {
           />
 
           <div className="max-w-xs">
-            <p className="text-sm capitalize truncate">{project.name}</p>
+            <p className="text-sm capitalize">
+              {project.name.split(" ").slice(0, 4).join(" ")}
+              {project.name.split(" ").length > 4 && "..."}
+            </p>
             <p className="text-xs text-white/50 -mt-0.5">
               Previewing last saved version
             </p>
@@ -288,17 +295,19 @@ const Projects = () => {
 
             <button
               onClick={togglePublish}
-              className={` flex items-center justify-center px-3 py-2 gap-2 rounded-md ${
+              className={` flex items-center justify-start px-3 py-2 gap-2 rounded-md ${
                 project.isPublished
                   ? " text-red-400 hover:bg-red-500/20"
                   : "text-white hover:bg-white/20"
               }`}
             >
-              <span>
-                {isPublishing && (
-                  <Loader2Icon className="animate-spin" size={16} />
-                )}
-              </span>
+              {isPublishing ? (
+                <Loader2Icon className="animate-spin" size={16} />
+              ) : project.isPublished ? (
+                <EyeOffIcon size={14} />
+              ) : (
+                <EyeIcon size={14} />
+              )}
               {project.isPublished ? "Unpublish" : "Publish"}
             </button>
           </div>
