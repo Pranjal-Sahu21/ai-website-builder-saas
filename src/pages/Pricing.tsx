@@ -1,22 +1,67 @@
 import React, { useEffect, useState } from "react";
+import Slider from "react-slick";
 import { appPlans } from "../assets/assets";
 import { useSession } from "@/lib/auth-client";
 import { toast } from "sonner";
 import api from "@/configs/axios.config";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+const NextArrow = (props: any) => {
+  const { onClick } = props;
+  return (
+    <button
+      onClick={onClick}
+      className="absolute -right-2 top-1/2 -translate-y-1/2 z-20 bg-black/60 border border-[#A6FF5D]/30 hover:border-[#A6FF5D] p-2 rounded-full backdrop-blur"
+    >
+      <ChevronRight className="text-[#A6FF5D]" size={18} />
+    </button>
+  );
+};
+
+const PrevArrow = (props: any) => {
+  const { onClick } = props;
+  return (
+    <button
+      onClick={onClick}
+      className="absolute -left-2 top-1/2 -translate-y-1/2 z-20 bg-black/60 border border-[#A6FF5D]/30 hover:border-[#A6FF5D] p-2 rounded-full backdrop-blur"
+    >
+      <ChevronLeft className="text-[#A6FF5D]" size={18} />
+    </button>
+  );
+};
+
+const sliderSettings = {
+  dots: false,
+  arrows: true,
+  infinite: true,
+  autoplay: true,
+  autoplaySpeed: 3500,
+  speed: 1000,
+  fade: true,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  nextArrow: <NextArrow />,
+  prevArrow: <PrevArrow />,
+};
 
 const Pricing: React.FC = () => {
   const { data: session } = useSession();
-
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
 
   const handlePurchase = async (planId: string) => {
     try {
-      if (!session?.user)
+      if (!session?.user) {
         return toast.error("Please login to purchase credits");
+      }
 
       setLoadingPlan(planId);
 
-      const { data } = await api.post("/api/user/purchase-credits", { planId });
+      const { data } = await api.post("/api/user/purchase-credits", {
+        planId,
+      });
+
       window.location.href = data.payment_link;
     } catch (error: any) {
       toast.error(error?.response?.data?.message || error.message);
@@ -29,11 +74,55 @@ const Pricing: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const PlanCard = ({ plan }: any) => (
+    <div
+      className={`relative flex flex-col gap-3 w-full p-6 rounded-2xl border scale-95 md:scale-100 border-neutral-800 ${
+        plan.id === "pro"
+          ? "bg-[#0D1F0D] border-[#A6FF5D]/40 md:scale-105"
+          : "bg-neutral-900/80 hover:border-[#A6FF5D]/40"
+      } transition-transform duration-300`}
+    >
+      {/* Popular badge */}
+      {plan.id === "pro" && (
+        <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#A6FF5D] text-gray-900 text-xs px-3 py-1 rounded-full shadow-lg">
+          Popular
+        </span>
+      )}
+
+      <h3 className="text-lg text-white mb-2">{plan.name}</h3>
+      <p className="text-3xl text-white">{plan.price}</p>
+      <p className="text-sm text-white/50 mb-2 -mt-2">
+        {plan.credits} AI credits
+      </p>
+      <p className="text-sm text-white/50 mb-4">{plan.description}</p>
+
+      <ul className="text-sm text-white/60 mb-6 flex-1 space-y-2">
+        {plan.features.map((feature: string, i: number) => (
+          <li key={i} className="flex items-center gap-2">
+            <span className="text-[#A6FF5D]">✔</span> {feature}
+          </li>
+        ))}
+      </ul>
+
+      <button
+        onClick={() => handlePurchase(plan.id)}
+        className={`w-full py-2.5 rounded-full text-sm transition ${
+          plan.id === "pro"
+            ? "bg-[#A6FF5D] text-gray-900 hover:bg-[#A6FF5D]/90"
+            : "bg-white/10 text-white hover:bg-white/20"
+        }`}
+        disabled={loadingPlan === plan.id}
+      >
+        {loadingPlan === plan.id ? "Processing..." : "Select Plan"}
+      </button>
+    </div>
+  );
+
   return (
     <section
       className="bg-black py-20 px-4 bg-[radial-gradient(rgba(166,255,93,0.15)_1.5px,transparent_0)]
-        bg-size-[20px_20px]
-        bg-position-[-1px_-1px]"
+      bg-size-[20px_20px]
+      bg-position-[-1px_-1px] pb-32"
       id="pricing"
     >
       {/* Heading */}
@@ -47,52 +136,24 @@ const Pricing: React.FC = () => {
         </p>
       </div>
 
-      {/* Plans */}
-      <div className="w-full max-w-6xl mx-auto mt-14 flex flex-wrap justify-center gap-10">
+      {/* Desktop Grid */}
+      <div className="hidden md:flex w-full max-w-6xl mx-auto mt-14 flex-wrap justify-center gap-10">
         {appPlans.map((plan) => (
-          <div
-            key={plan.id}
-            className={`relative flex flex-col gap-3 w-72 p-6 rounded-2xl border border-neutral-800 ${
-              plan.id === "pro"
-                ? "bg-[#0D1F0D] border-[#A6FF5D] scale-105"
-                : "bg-neutral-900/80 hover:border-[#A6FF5D]/40"
-            } transition-transform duration-300`}
-          >
-            {/* Popular badge */}
-            {plan.id === "pro" && (
-              <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#A6FF5D] text-gray-900 text-xs px-3 py-1 rounded-full shadow-lg">
-                Popular
-              </span>
-            )}
-
-            <h3 className="text-lg text-white mb-2">{plan.name}</h3>
-            <p className="text-3xl text-white">{plan.price}</p>
-            <p className="text-sm text-white/50 mb-2 -mt-2">
-              {plan.credits} AI credits
-            </p>
-            <p className="text-sm text-white/50 mb-4">{plan.description}</p>
-
-            <ul className="text-sm text-white/60 mb-6 flex-1 space-y-2">
-              {plan.features.map((feature, i) => (
-                <li key={i} className="flex items-center gap-2">
-                  <span className="text-[#A6FF5D]">✔</span> {feature}
-                </li>
-              ))}
-            </ul>
-
-            <button
-              onClick={() => handlePurchase(plan.id)}
-              className={`w-full py-2.5 rounded-full text-sm transition ${
-                plan.id === "pro"
-                  ? "bg-[#A6FF5D] text-gray-900 hover:bg-[#A6FF5D]/90"
-                  : "bg-white/10 text-white hover:bg-white/20"
-              }`}
-              disabled={loadingPlan === plan.id}
-            >
-              {loadingPlan === plan.id ? "Processing..." : "Select Plan"}
-            </button>
+          <div key={plan.id} className="w-72">
+            <PlanCard plan={plan} />
           </div>
         ))}
+      </div>
+
+      {/* Mobile Slider */}
+      <div className="md:hidden w-full max-w-md mx-auto mt-14">
+        <Slider {...sliderSettings}>
+          {appPlans.map((plan) => (
+            <div key={plan.id} className="px-2">
+              <PlanCard plan={plan} />
+            </div>
+          ))}
+        </Slider>
       </div>
     </section>
   );
