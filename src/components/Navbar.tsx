@@ -165,7 +165,7 @@ const Navbar = () => {
           </div>
         )}
 
-        <div className="flex justify-center items-center lg:hidden md:gap-2">
+        <div className="flex -mr-2 justify-center items-center lg:hidden md:gap-2">
           {session ? (
             <div className="flex justify-center items-center">
               <span className="text-white/80 p-3 rounded-full text-sm">
