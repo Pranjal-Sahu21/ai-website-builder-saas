@@ -7,7 +7,22 @@ import api from "@/configs/axios.config";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 
+// Animation settings
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 },
+  },
+};
+const item = {
+  hidden: { opacity: 0, y: 40 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+// Next Arrow UI
 const NextArrow = (props: any) => {
   const { onClick } = props;
   return (
@@ -20,6 +35,7 @@ const NextArrow = (props: any) => {
   );
 };
 
+// Prev Arrow UI
 const PrevArrow = (props: any) => {
   const { onClick } = props;
   return (
@@ -32,6 +48,7 @@ const PrevArrow = (props: any) => {
   );
 };
 
+// Slider Settings
 const sliderSettings = {
   dots: false,
   arrows: true,
@@ -70,10 +87,12 @@ const Pricing: React.FC = () => {
     }
   };
 
+  // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Plan Card component
   const PlanCard = ({ plan }: any) => (
     <div
       className={`relative flex flex-col gap-3 w-full p-6 rounded-2xl border scale-95 md:scale-100 border-neutral-800 ${
@@ -89,6 +108,7 @@ const Pricing: React.FC = () => {
         </span>
       )}
 
+      {/* Plan details */}
       <h3 className="text-lg text-white mb-2">{plan.name}</h3>
       <p className="text-3xl text-white">{plan.price}</p>
       <p className="text-sm text-white/50 mb-2 -mt-2">
@@ -104,6 +124,7 @@ const Pricing: React.FC = () => {
         ))}
       </ul>
 
+      {/* Buy plan button */}
       <button
         onClick={() => handlePurchase(plan.id)}
         className={`w-full py-2.5 rounded-full text-sm transition ${
@@ -126,24 +147,37 @@ const Pricing: React.FC = () => {
       id="pricing"
     >
       {/* Heading */}
-      <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="flex flex-col items-center text-center max-w-4xl mx-auto"
+      >
         <h2 className="text-white text-3xl md:text-4xl mt-10">
           Choose your perfect{" "}
           <span className="text-[#A6FF5D] italic">plan</span>
         </h2>
+
         <p className="text-white/50 text-sm max-w-md mx-auto mt-4">
           Plans for creators and teams to launch fast.
         </p>
-      </div>
+      </motion.div>
 
       {/* Desktop Grid */}
-      <div className="hidden md:flex w-full max-w-6xl mx-auto mt-14 flex-wrap justify-center gap-10">
+      <motion.div
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="hidden md:flex w-full max-w-6xl mx-auto mt-14 flex-wrap justify-center gap-10"
+      >
         {appPlans.map((plan) => (
-          <div key={plan.id} className="w-72">
+          <motion.div key={plan.id} variants={item} className="w-72">
             <PlanCard plan={plan} />
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Mobile Slider */}
       <div className="md:hidden w-full max-w-md mx-auto mt-14">
