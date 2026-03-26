@@ -5,6 +5,20 @@ import { Link, useNavigate } from "react-router-dom";
 import api from "@/configs/axios.config";
 import { toast } from "sonner";
 import { useSession } from "@/lib/auth-client";
+import { motion } from "framer-motion";
+
+// Animation settings
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+};
+const item = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+};
 
 const MyProjects = () => {
   const { data: session, isPending } = useSession();
@@ -65,17 +79,26 @@ const MyProjects = () => {
       bg-position-[-1px_-1px]"
     >
       {loading ? (
-        <div className="h-[80vh] flex flex-col items-center justify-center bg-transparent text-white">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="h-[80vh] flex flex-col items-center justify-center bg-transparent text-white"
+        >
           <Loader2Icon className="size-10 animate-spin text-[#A6FF5D]" />
 
           <p className="mt-4 text-md text-white/60 tracking-wide">
             Loading your projects...
           </p>
-        </div>
+        </motion.div>
       ) : projects.length > 0 ? (
         <div className="py-10 min-h-[80vh]">
           {/* Header */}
-          <div className="flex flex-col sm:flex-row items-center justify-between mb-12 gap-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col sm:flex-row items-center justify-between mb-12 gap-6"
+          >
             <h1 className="text-3xl sm:text-4xl text-white">
               My <span className="text-[#A6FF5D] italic">Projects</span>
             </h1>
@@ -87,12 +110,19 @@ const MyProjects = () => {
               <PlusIcon size={16} />
               Create
             </Link>
-          </div>
+          </motion.div>
 
           {/* Projects Grid */}
-          <div className="flex flex-wrap gap-9 lg:gap-9 justify-center lg:justify-start">
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="flex flex-wrap gap-9 lg:gap-9 justify-center lg:justify-start"
+          >
+            {/* Project Card */}
             {projects.map((project) => (
-              <div
+              <motion.div
+                variants={item}
                 onClick={() => navigate(`/projects/${project.id}`)}
                 key={project.id}
                 className="relative group w-72 rounded-lg overflow-hidden bg-neutral-900/70 backdrop-blur border border-neutral-800 hover:border-[#A6FF5D]/40 hover:shadow-lg transition-all duration-300 cursor-pointer"
@@ -107,6 +137,7 @@ const MyProjects = () => {
                       style={{ transform: "scale(0.25)" }}
                     />
                   ) : (
+                    // No preview available
                     <div className="flex items-center justify-center h-full text-gray-400">
                       <p>No preview available</p>
                     </div>
@@ -181,12 +212,18 @@ const MyProjects = () => {
                     />
                   )}
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center h-[80vh] text-center gap-6">
+        // No personal projects
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col items-center justify-center h-[80vh] text-center gap-6"
+        >
           <h1 className="text-4xl sm:text-5xl text-white">
             You have no <span className="text-[#A6FF5D] italic">projects</span>{" "}
             yet
@@ -202,7 +239,7 @@ const MyProjects = () => {
           >
             Create Project
           </button>
-        </div>
+        </motion.div>
       )}
     </div>
   );
