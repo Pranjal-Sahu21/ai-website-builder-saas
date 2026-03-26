@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { AuthView } from "@daveyplate/better-auth-ui";
 import { ArrowUpRightFromSquare } from "lucide-react";
+import { motion } from "framer-motion";
 
 type FeatureProps = {
   title: string;
@@ -21,14 +22,14 @@ export default function AuthPage() {
 
   return (
     <div className="relative min-h-screen flex bg-black text-white overflow-hidden">
-      {/* DIAGONAL CROSS GRID BACKGROUND */}
+      {/* GRID BACKGROUND */}
       <div
         className="absolute inset-0"
         style={{
           backgroundImage: `
-          linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)
-        `,
+            linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)
+          `,
           backgroundSize: "50px 50px",
           WebkitMaskImage:
             "radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
@@ -37,12 +38,17 @@ export default function AuthPage() {
         }}
       />
 
-      {/* ACCENT GLOW */}
+      {/* STATIC ACCENT GLOW */}
       <div className="absolute -top-50 left-0 md:left-[20%] w-175 h-175 bg-[#A6FF5D]/10 blur-[160px] rounded-full" />
 
       <div className="relative z-10 flex w-full">
         {/* LEFT SIDE */}
-        <div className="hidden lg:flex flex-col justify-center px-20 w-1/2 relative mt-14">
+        <motion.div
+          initial={{ opacity: 0, x: -80 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+          className="hidden lg:flex flex-col justify-center px-20 w-1/2 relative mt-14"
+        >
           <h1 className="text-5xl leading-tight">
             Build web apps <br />
             with <span className="text-[#A6FF5D] italic">AI</span>
@@ -70,16 +76,21 @@ export default function AuthPage() {
               desc="Download production-ready code."
             />
           </div>
-        </div>
+        </motion.div>
 
-        {/* AUTH FORM SIDE */}
-        <div className="flex flex-1 items-center justify-center px-6 sm:px-10">
-          <div className="relative w-full max-w-md">
-            {/* Subtle Glow Behind Card */}
+        {/* RIGHT SIDE (AUTH) */}
+        <div className="flex flex-1 items-center justify-center px-2 sm:px-8">
+          <motion.div
+            initial={{ opacity: 0, x: 80 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+            className="relative w-full max-w-md"
+          >
+            {/* Glow */}
             <div className="absolute inset-0 bg-[#A6FF5D]/5 blur-3xl rounded-3xl pointer-events-none" />
 
             {/* Card */}
-            <div className="relative w-full max-w-md mx-auto flex flex-col items-center px-2 sm:px-0 space-y-5">
+            <div className="relative w-full flex flex-col justify-center items-center space-y-5">
               {/* Auth UI */}
               <AuthView
                 pathname={pathname}
@@ -87,12 +98,14 @@ export default function AuthPage() {
                   base: "space-y-3 bg-neutral-950/80 w-full max-w-md mx-auto",
                 }}
               />
+
               {/* Divider */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 w-full">
                 <div className="h-px flex-1 bg-white/10" />
                 <span className="text-[10px] text-white/40">or</span>
                 <div className="h-px flex-1 bg-white/10" />
               </div>
+
               {/* Back Link */}
               <Link
                 to="/"
@@ -102,7 +115,7 @@ export default function AuthPage() {
                 <ArrowUpRightFromSquare className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </Link>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>
