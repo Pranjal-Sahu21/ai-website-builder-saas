@@ -41,7 +41,7 @@ const FAQSection = () => {
       id="faq"
       className="bg-black py-20 px-4  bg-[radial-gradient(rgba(166,255,93,0.15)_1.5px,transparent_0)]
         bg-size-[20px_20px]
-        bg-position-[-1px_-1px]"
+        bg-position-[-1px_-1px] bg-fixed"
     >
       <div className="max-w-3xl mx-auto text-center">
         {/* Heading */}

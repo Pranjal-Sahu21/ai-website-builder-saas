@@ -73,10 +73,10 @@ const MyProjects = () => {
 
   return (
     <div
-      className="px-4 md:px-16 lg:px-24 xl:px-32 bg-black min-h-screen text-white font-geist mt-24
+      className="px-4 md:px-16 lg:px-24 xl:px-32 bg-black min-h-screen text-white font-geist mt-20
       bg-[radial-gradient(rgba(166,255,93,0.15)_1.5px,transparent_0)] 
       bg-size-[20px_20px] 
-      bg-position-[-1px_-1px]"
+      bg-position-[-1px_-1px] bg-fixed"
     >
       {loading ? (
         <motion.div

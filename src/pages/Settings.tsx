@@ -24,7 +24,7 @@ const Settings = () => {
     <div
       className="bg-[radial-gradient(rgba(166,255,93,0.15)_1.5px,transparent_0)] 
       bg-size-[20px_20px] 
-      bg-position-[-1px_-1px]"
+      bg-position-[-1px_-1px] bg-fixed"
     >
       {/* HEADER */}
       <div className="text-center space-y-3 ">

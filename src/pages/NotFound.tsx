@@ -22,7 +22,7 @@ const NotFound: React.FC = () => {
       />
 
       {/* TOP GLOW */}
-      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-125 h-125 bg-[#A6FF5D]/10 blur-[140px] rounded-full" />
+      <div className="absolute left-1/2 -translate-x-1/2 w-125 h-125 bg-[#A6FF5D]/20 blur-[140px] rounded-full" />
 
       {/* BOTTOM GLOW */}
       <div className="absolute bottom-0 right-1/4 w-75 h-75 bg-[#A6FF5D]/5 blur-[120px] rounded-full" />
