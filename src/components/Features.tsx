@@ -55,17 +55,17 @@ const Features = () => {
           {/* Feature 1 */}
           <motion.div
             variants={item}
-            className="bg-neutral-900/80 backdrop-blur border border-neutral-800 rounded-2xl hover:border-[#A6FF5D]/40 transition duration-300 p-6 flex flex-col"
+            className="group bg-neutral-900/80 backdrop-blur border border-neutral-800 rounded-2xl hover:border-[#A6FF5D]/40 transition duration-300 p-6 flex flex-col"
           >
-            <div className="flex-1 flex items-center justify-center">
+            <div className="w-full aspect-16/10 overflow-hidden rounded-xl bg-neutral-800">
               <img
-                className="w-full object-contain"
-                src="https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800"
+                src="https://images.unsplash.com/photo-1677442135136-760c813028c0?q=80&w=1200"
                 alt="ai-generation"
+                className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
               />
             </div>
 
-            <h3 className="text-lg text-white mt-8 text-left">
+            <h3 className="text-lg text-white mt-6 text-left">
               Instant AI Generation
             </h3>
 
@@ -78,17 +78,17 @@ const Features = () => {
           {/* Feature 2 */}
           <motion.div
             variants={item}
-            className="bg-neutral-900/80 backdrop-blur border border-neutral-800 rounded-2xl hover:border-[#A6FF5D]/40 transition duration-300 p-6 flex flex-col"
+            className="group bg-neutral-900/80 backdrop-blur border border-neutral-800 rounded-2xl hover:border-[#A6FF5D]/40 transition duration-300 p-6 flex flex-col"
           >
-            <div className="flex-1 flex items-center justify-center">
+            <div className="w-full aspect-16/10 overflow-hidden rounded-xl bg-neutral-800">
               <img
-                className="w-full object-contain"
-                src="https://images.unsplash.com/photo-1559028012-481c04fa702d?q=80&w=800"
+                src="https://plus.unsplash.com/premium_photo-1721910821871-f8caece8d381?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8V2Vic2l0ZSUyMEN1c3RvbWl6YXRpb258ZW58MHx8MHx8fDA%3D"
                 alt="dashboard"
+                className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
               />
             </div>
 
-            <h3 className="text-lg text-white mt-8 text-left">
+            <h3 className="text-lg text-white mt-6 text-left">
               Smart Customization
             </h3>
 
@@ -101,17 +101,17 @@ const Features = () => {
           {/* Feature 3 */}
           <motion.div
             variants={item}
-            className="bg-neutral-900/80 backdrop-blur border border-neutral-800 rounded-2xl hover:border-[#A6FF5D]/40 transition duration-300 p-6 flex flex-col"
+            className="group bg-neutral-900/80 backdrop-blur border border-neutral-800 rounded-2xl hover:border-[#A6FF5D]/40 transition duration-300 p-6 flex flex-col"
           >
-            <div className="flex-1 flex items-center justify-center">
+            <div className="w-full aspect-16/10 overflow-hidden rounded-xl bg-neutral-800">
               <img
-                className="w-full object-contain"
-                src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800"
+                src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200"
                 alt="deployment"
+                className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
               />
             </div>
 
-            <h3 className="text-lg text-white mt-8 text-left">
+            <h3 className="text-lg text-white mt-6 text-left">
               One-Click Deployment
             </h3>
 
