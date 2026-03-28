@@ -1,4 +1,4 @@
-import React from "react";
+import { motion } from "framer-motion";
 
 // Testimonials data
 const testimonials = [
@@ -90,24 +90,47 @@ const testimonials = [
   },
 ];
 
-const Testimonials: React.FC = () => {
+// Animations settings
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 },
+  },
+};
+const item = {
+  hidden: { opacity: 0, y: 40 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
+const Testimonials = () => {
   return (
     <section
       id="testimonials"
-      className="bg-black py-24 px-4 relative overflow-hidden bg-[radial-gradient(rgba(166,255,93,0.15)_1.5px,transparent_0)]
-        bg-size-[20px_20px]
-        bg-position-[-1px_-1px] bg-fixed"
+      className="bg-black py-24 px-4 relative overflow-hidden 
+      bg-[radial-gradient(rgba(166,255,93,0.15)_1.5px,transparent_0)]
+      bg-size-[20px_20px]
+      bg-position-[-1px_-1px] bg-fixed"
     >
-      <div className="relative max-w-6xl mx-auto text-center">
+      <motion.div
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-100px" }}
+        className="relative max-w-6xl mx-auto text-center"
+      >
         {/* Heading */}
-        <h2 className="text-white text-3xl md:text-4xl">
+        <motion.h2 variants={item} className="text-white text-3xl md:text-4xl">
           Trusted for <span className="text-[#A6FF5D] italic">Performance</span>
-        </h2>
+        </motion.h2>
 
         {/* Description */}
-        <p className="text-white/50 text-sm max-w-md mx-auto mt-4">
+        <motion.p
+          variants={item}
+          className="text-white/50 text-sm max-w-md mx-auto mt-4"
+        >
           Real feedback from people building with AI.
-        </p>
+        </motion.p>
 
         {/* Rows */}
         <div className="space-y-8 mt-16">
@@ -117,11 +140,15 @@ const Testimonials: React.FC = () => {
               row === 0 ? "animate-scroll" : "animate-scroll-reverse";
 
             return (
-              <div key={row} className="relative overflow-hidden w-full">
-                {/* Gradient Fade - Left */}
+              <motion.div
+                key={row}
+                variants={item}
+                className="relative overflow-hidden w-full"
+              >
+                {/* Gradient Left */}
                 <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-linear-to-r from-black to-transparent z-10 pointer-events-none" />
 
-                {/* Gradient Fade - Right */}
+                {/* Gradient Right */}
                 <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-linear-to-l from-black to-transparent z-10 pointer-events-none" />
 
                 {/* Scrolling Row */}
@@ -130,21 +157,7 @@ const Testimonials: React.FC = () => {
                     (item, index) => (
                       <div
                         key={index}
-                        className="
-            bg-neutral-900/80 
-            backdrop-blur 
-            border 
-            border-neutral-800 
-            hover:border-[#A6FF5D]/40 
-            transition 
-            duration-300 
-            rounded-2xl 
-            p-5 sm:p-6 
-            shrink-0 
-            w-65 
-            sm:w-75 
-            md:w-85
-          "
+                        className="bg-neutral-900/80 backdrop-blur border border-neutral-800 hover:border-[#A6FF5D]/40 transition duration-300 rounded-2xl p-5 sm:p-6 shrink-0 w-65 sm:w-75 md:w-85"
                       >
                         {/* Stars */}
                         <div className="flex mb-4 text-[#A6FF5D] text-sm">
@@ -176,13 +189,13 @@ const Testimonials: React.FC = () => {
                     ),
                   )}
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
-      </div>
+      </motion.div>
 
-      {/* Animations */}
+      {/* Marquee animation */}
       <style>
         {`
           @keyframes scroll {
