@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 // FAQ data
 const faqs = [
@@ -29,9 +30,23 @@ const faqs = [
   },
 ];
 
+// Animation settings
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12 },
+  },
+};
+const item = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { duration: 0.5 } },
+};
+
 const FAQSection = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
+  // Toggle FAQ function
   const toggleFAQ = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
@@ -39,30 +54,39 @@ const FAQSection = () => {
   return (
     <section
       id="faq"
-      className="bg-black py-20 px-4  bg-[radial-gradient(rgba(166,255,93,0.15)_1.5px,transparent_0)]
-        bg-size-[20px_20px]
-        bg-position-[-1px_-1px] bg-fixed"
+      className="bg-black py-20 px-4  
+      bg-[radial-gradient(rgba(166,255,93,0.15)_1.5px,transparent_0)]
+      bg-size-[20px_20px]
+      bg-position-[-1px_-1px] bg-fixed"
     >
-      <div className="max-w-3xl mx-auto text-center">
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={container}
+        className="max-w-3xl mx-auto text-center"
+      >
         {/* Heading */}
-        <h2 className="text-3xl md:text-4xl text-white">
+        <motion.h2 variants={item} className="text-3xl md:text-4xl text-white">
           Got Questions about{" "}
           <span className="text-[#A6FF5D] italic">Genixor?</span>
-        </h2>
+        </motion.h2>
 
         {/* Description */}
-        <p className="text-white/60 text-sm mt-3 mb-10">
+        <motion.p variants={item} className="text-white/60 text-sm mt-3 mb-10">
           Everything you need to know before building your AI-powered website.
-        </p>
+        </motion.p>
 
         {/* FAQ List */}
-        <div className="space-y-4 text-left">
+        <motion.div variants={container} className="space-y-4 text-left">
           {faqs.map((faq, index) => {
             const isOpen = activeIndex === index;
 
             return (
-              <div
+              <motion.div
                 key={index}
+                variants={item}
+                whileHover={{ scale: 1.01 }}
                 className="border border-neutral-800 rounded-2xl bg-neutral-900/70 backdrop-blur transition hover:border-[#A6FF5D]/40"
               >
                 {/* Question */}
@@ -70,7 +94,7 @@ const FAQSection = () => {
                   onClick={() => toggleFAQ(index)}
                   className="w-full flex items-center justify-between px-6 py-5 text-left"
                 >
-                  <span className="text-white/90 ">{faq.question}</span>
+                  <span className="text-white/90">{faq.question}</span>
 
                   <span
                     className={`transition-transform duration-300 text-[#A6FF5D] ${
@@ -78,7 +102,7 @@ const FAQSection = () => {
                     }`}
                   >
                     <svg
-                      className="w-4 h-4 text-[#A6FF5D]"
+                      className="w-4 h-4"
                       fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
@@ -94,18 +118,22 @@ const FAQSection = () => {
                 </button>
 
                 {/* Answer */}
-                <div
-                  className={`px-6 overflow-hidden transition-all duration-300 ${
-                    isOpen ? "max-h-40 pb-6" : "max-h-0"
-                  }`}
+                <motion.div
+                  initial={false}
+                  animate={{
+                    height: isOpen ? "auto" : 0,
+                    opacity: isOpen ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="px-6 overflow-hidden"
                 >
-                  <p className="text-white/60 text-sm">{faq.answer}</p>
-                </div>
-              </div>
+                  <p className="text-white/60 text-sm pb-6">{faq.answer}</p>
+                </motion.div>
+              </motion.div>
             );
           })}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
