@@ -152,7 +152,7 @@ const Pricing: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="flex flex-col items-center text-center max-w-4xl mx-auto"
+        className="flex flex-col items-center text-center max-w-4xl mx-auto mt-12 md:mt-0"
       >
         <h2 className="text-white text-3xl md:text-4xl mt-10">
           Choose your perfect{" "}
