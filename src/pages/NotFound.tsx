@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import AnimatedHeadline from "../components/AnimatedHeadline";
 
 const NotFound: React.FC = () => {
   return (
@@ -50,14 +51,19 @@ const NotFound: React.FC = () => {
         </motion.h1>
 
         {/* Heading */}
-        <motion.h2
-          className="text-2xl md:text-4xl font-semibold mt-2 mb-4"
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          Page Not Found
-        </motion.h2>
+          <AnimatedHeadline
+            as="h2"
+            className="text-2xl md:text-4xl font-semibold mt-2 mb-4"
+            triggerOnView={false}
+          >
+            Page Not Found
+          </AnimatedHeadline>
+        </motion.div>
 
         {/* Description */}
         <motion.p

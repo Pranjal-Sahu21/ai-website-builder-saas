@@ -5,6 +5,7 @@ import { useSession } from "@/lib/auth-client";
 import { toast } from "sonner";
 import api from "@/configs/axios.config";
 import { motion } from "framer-motion";
+import AnimatedHeadline from "../components/AnimatedHeadline";
 
 export default function GeneratePage() {
   const [prompt, setPrompt] = useState("");
@@ -127,9 +128,15 @@ export default function GeneratePage() {
         </motion.div>
 
         {/* Heading */}
-        <motion.h1 variants={item} className="text-4xl md:text-5xl font-medium">
-          Hi, <span className="text-[#A6FF5D] italic">{username}</span> !
-        </motion.h1>
+        <motion.div variants={item}>
+          <AnimatedHeadline
+            as="h1"
+            className="text-4xl md:text-5xl font-medium"
+            triggerOnView={false}
+          >
+            Hi, <span className="text-[#A6FF5D] italic">{username}</span> !
+          </AnimatedHeadline>
+        </motion.div>
 
         <motion.p variants={item} className="text-white/60 mt-4 text-sm">
           What would you like to build today?
