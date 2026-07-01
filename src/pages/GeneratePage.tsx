@@ -11,7 +11,7 @@ export default function GeneratePage() {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const { data: session } = useSession();
+  const { data: session, isPending } = useSession();
   const username = session?.user?.name?.split(" ")[0] || "User";
 
   const navigate = useNavigate();
@@ -44,11 +44,11 @@ export default function GeneratePage() {
   // Check if signed in
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (!session?.user) {
+    if (!isPending && !session?.user) {
       navigate("/auth/sign-in");
       toast("Please login to start building.");
     }
-  }, [session?.user]);
+  }, [session?.user, isPending]);
 
   // Animations
   const container = {

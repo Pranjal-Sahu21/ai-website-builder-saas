@@ -85,16 +85,7 @@ const Navbar = () => {
             >
               Pricing
             </Link>
-            <Link
-              to="/"
-              onClick={() => {
-                scrollToSection("faq");
-                setMenuOpen(false);
-              }}
-              className="text-white/80 hover:text-[#A6FF5D]"
-            >
-              FAQs
-            </Link>
+            
             {session ? (
               <div className="flex gap-4 justify-center items-center">
                 <span className="text-white/80 gap-1 hidden lg:flex">
