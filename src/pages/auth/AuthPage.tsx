@@ -1,6 +1,6 @@
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { AuthView } from "@daveyplate/better-auth-ui";
-import { ArrowUpRightFromSquare, Loader2Icon } from "lucide-react";
+import { ArrowUpRightFromSquare } from "lucide-react";
 import { motion } from "framer-motion";
 import { useSession } from "@/lib/auth-client";
 import { useEffect } from "react";
@@ -29,17 +29,6 @@ export default function AuthPage() {
       navigate("/generate", { replace: true });
     }
   }, [session?.user, isPending]);
-
-  if (isPending) {
-    return (
-      <div className="h-screen flex flex-col items-center justify-center bg-black text-white">
-        <Loader2Icon className="size-10 animate-spin text-[#A6FF5D]" />
-        <p className="mt-4 text-md text-white/60 tracking-wide">
-          Verifying session...
-        </p>
-      </div>
-    );
-  }
 
   return (
     <div className="relative min-h-screen flex bg-black text-white overflow-hidden">
