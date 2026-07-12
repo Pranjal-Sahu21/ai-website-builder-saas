@@ -107,10 +107,7 @@ const Testimonials = () => {
   return (
     <section
       id="testimonials"
-      className="bg-black py-24 px-4 relative overflow-hidden 
-      bg-[radial-gradient(rgba(166,255,93,0.15)_1.5px,transparent_0)]
-      bg-size-[20px_20px]
-      bg-position-[-1px_-1px] bg-fixed"
+      className="bg-black py-24 px-4 relative overflow-hidden"
     >
       <motion.div
         variants={container}

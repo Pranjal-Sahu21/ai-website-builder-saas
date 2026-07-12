@@ -63,7 +63,7 @@ const HeroSection: React.FC = () => {
           variants={item}
           className="text-4xl md:text-[64px]/[82px] max-w-4xl leading-tight"
         >
-          Build Stunning Websites with AI in{" "}
+          Build Stunning Websites  <br />with AI in{" "}
           <span className="text-[#A6FF5D] italic">seconds</span>
         </motion.h1>
 

@@ -54,10 +54,7 @@ const FAQSection = () => {
   return (
     <section
       id="faq"
-      className="bg-black py-20 px-4  
-      bg-[radial-gradient(rgba(166,255,93,0.15)_1.5px,transparent_0)]
-      bg-size-[20px_20px]
-      bg-position-[-1px_-1px] bg-fixed"
+      className="bg-black py-20 px-4"
     >
       <motion.div
         initial="hidden"

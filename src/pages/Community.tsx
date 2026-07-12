@@ -44,10 +44,7 @@ const Community = () => {
 
   return (
     <div
-      className="px-4 md:px-16 lg:px-24 xl:px-32 bg-black min-h-screen text-white font-geist mt-20
-      bg-[radial-gradient(rgba(166,255,93,0.15)_1.5px,transparent_0)] 
-      bg-size-[20px_20px] 
-      bg-position-[-1px_-1px] bg-fixed"
+      className="px-4 md:px-16 lg:px-24 xl:px-32 bg-black min-h-screen text-white font-geist mt-20"
     >
       {loading ? (
         <motion.div
@@ -79,65 +76,70 @@ const Community = () => {
             variants={container}
             initial="hidden"
             animate="show"
-            className="flex flex-wrap gap-9 justify-center lg:justify-start"
+            className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-8 w-full justify-items-center sm:justify-items-stretch"
           >
             {/* Project Card */}
             {projects.map((project) => (
               <motion.div
                 key={project.id}
                 variants={item}
-                className="w-72"
+                className="w-full max-w-sm"
               >
                 <Link
                   to={`/view/${project.id}`}
                   target="_blank"
-                  className="block rounded-lg overflow-hidden bg-neutral-900/70 backdrop-blur border border-neutral-800 hover:border-[#A6FF5D]/40 hover:shadow-lg transition-all duration-300"
+                  className="block group rounded-2xl overflow-hidden bg-neutral-900/40 hover:bg-neutral-900/70 border border-neutral-800 hover:border-[#A6FF5D]/30 hover:shadow-[0_0_30px_rgba(166,255,93,0.02)] transition-all duration-300"
                 >
                   {/* Preview */}
-                  <div className="relative w-full h-40 overflow-hidden rounded-t-lg bg-neutral-800">
+                  <div className="relative w-full h-44 overflow-hidden rounded-t-2xl bg-neutral-950 border-b border-neutral-800/50">
                     {project.current_code ? (
-                      <iframe
-                        srcDoc={project.current_code}
-                        className="absolute top-0 left-0 w-300 h-200 origin-top-left pointer-events-none"
-                        sandbox="allow-scripts allow-same-origin"
-                        style={{ transform: "scale(0.25)" }}
-                      />
+                      <div className="w-full h-full group-hover:scale-[1.02] transition-transform duration-500 origin-center">
+                        <iframe
+                          srcDoc={project.current_code}
+                          className="absolute top-0 left-0 w-[400%] h-[400%] origin-top-left pointer-events-none overflow-hidden"
+                          scrolling="no"
+                          sandbox="allow-scripts allow-same-origin"
+                          style={{ transform: "scale(0.25)" }}
+                        />
+                      </div>
                     ) : (
                       // No preview available
-                      <div className="flex items-center justify-center h-full text-gray-400">
-                        <p>No preview available</p>
+                      <div className="flex items-center justify-center h-full text-neutral-500">
+                        <span className="text-xs">No preview available</span>
                       </div>
                     )}
                   </div>
 
                   {/* Content */}
-                  <div className="p-4 flex flex-col gap-2">
-                    <div className="flex items-center justify-between">
-                      <h2 className="text-md text-white line-clamp-2">
+                  <div className="p-5 flex flex-col gap-3">
+                    <div>
+                      <h2 className="text-base font-semibold text-white font-display line-clamp-1 group-hover:text-[#A6FF5D] transition-colors duration-200">
                         {project.name}
                       </h2>
                     </div>
 
-                    <p className="text-xs text-white/60 line-clamp-2">
+                    <p className="text-xs text-white/50 leading-relaxed line-clamp-2">
                       {project.initial_prompt || "No description provided."}
                     </p>
 
+                    <div className="border-t border-neutral-800/80 my-1" />
+
                     {/* Footer */}
-                    <div className="flex justify-between items-center mt-6">
-                      <span className="text-xs text-white/50">
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs text-white/40">
                         {new Date(project.createdAt).toLocaleDateString()}
                       </span>
 
-                      <div className="flex gap-3 text-sm">
-                        <button className="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-neutral-800 hover:border-[#A6FF5D]/40 px-3 py-1.5 rounded-full transition-all duration-200">
+                      <div className="flex gap-2">
+                        <div className="flex items-center gap-2 bg-white/5 border border-neutral-800 px-3 py-1.5 rounded-full text-xs">
                           <div className="flex items-center justify-center size-5 rounded-full bg-[#A6FF5D] text-gray-900 text-[10px] font-semibold">
                             {project.user?.name?.slice(0, 1)}
                           </div>
 
-                          <span className="text-xs text-white/80 truncate max-w-22.5">
+                          <span className="text-xs text-white/80 truncate max-w-22.5 font-medium">
                             {project.user?.name?.split(" ")[0]}
                           </span>
-                        </button>
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -38,9 +38,7 @@ const Settings = () => {
 
   return (
     <div
-      className="bg-[radial-gradient(rgba(166,255,93,0.15)_1.5px,transparent_0)] 
-      bg-size-[20px_20px] 
-      bg-position-[-1px_-1px] bg-fixed min-h-screen pb-24"
+      className="bg-black min-h-screen pb-24"
     >
       <motion.div
         variants={container}

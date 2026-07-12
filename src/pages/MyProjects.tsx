@@ -73,10 +73,7 @@ const MyProjects = () => {
 
   return (
     <div
-      className="px-4 md:px-16 lg:px-24 xl:px-32 bg-black min-h-screen text-white font-geist mt-20
-      bg-[radial-gradient(rgba(166,255,93,0.15)_1.5px,transparent_0)] 
-      bg-size-[20px_20px] 
-      bg-position-[-1px_-1px] bg-fixed"
+      className="px-4 md:px-16 lg:px-24 xl:px-32 bg-black min-h-screen text-white font-geist mt-20"
     >
       {loading ? (
         <motion.div
@@ -117,7 +114,7 @@ const MyProjects = () => {
             variants={container}
             initial="hidden"
             animate="show"
-            className="flex flex-wrap gap-9 lg:gap-9 justify-center lg:justify-start"
+            className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-8 w-full justify-items-center sm:justify-items-stretch"
           >
             {/* Project Card */}
             {projects.map((project) => (
@@ -125,69 +122,76 @@ const MyProjects = () => {
                 variants={item}
                 onClick={() => navigate(`/projects/${project.id}`)}
                 key={project.id}
-                className="relative group w-72 rounded-lg overflow-hidden bg-neutral-900/70 backdrop-blur border border-neutral-800 hover:border-[#A6FF5D]/40 hover:shadow-lg transition-all duration-300 cursor-pointer"
+                className="relative group w-full max-w-sm rounded-2xl overflow-hidden bg-neutral-900/40 hover:bg-neutral-900/70 border border-neutral-800 hover:border-[#A6FF5D]/30 hover:shadow-[0_0_30px_rgba(166,255,93,0.02)] transition-all duration-300 cursor-pointer"
               >
                 {/* Mini Preview */}
-                <div className="relative w-full h-40 overflow-hidden rounded-t-lg bg-neutral-800">
+                <div className="relative w-full h-44 overflow-hidden rounded-t-2xl bg-neutral-950 border-b border-neutral-800/50">
                   {project.current_code ? (
-                    <iframe
-                      srcDoc={project.current_code}
-                      className="absolute top-0 left-0 w-300 h-200 origin-top-left pointer-events-none"
-                      sandbox="allow-scripts allow-same-origin"
-                      style={{ transform: "scale(0.25)" }}
-                    />
+                    <div className="w-full h-full group-hover:scale-[1.02] transition-transform duration-500 origin-center">
+                      <iframe
+                        srcDoc={project.current_code}
+                        className="absolute top-0 left-0 w-[400%] h-[400%] origin-top-left pointer-events-none overflow-hidden"
+                        scrolling="no"
+                        sandbox="allow-scripts allow-same-origin"
+                        style={{ transform: "scale(0.25)" }}
+                      />
+                    </div>
                   ) : (
                     // No preview available
-                    <div className="flex items-center justify-center h-full text-gray-400">
-                      <p>No preview available</p>
+                    <div className="flex items-center justify-center h-full text-neutral-500">
+                      <span className="text-xs">No preview available</span>
                     </div>
                   )}
                 </div>
 
                 {/* Content */}
-                <div className="p-4 flex flex-col gap-2">
+                <div className="p-5 flex flex-col gap-3">
                   {/* Title + Tag */}
-                  <div className="flex items-center justify-between">
-                    <h2 className="text-md text-white line-clamp-2">
+                  <div>
+                    <h2 className="text-base font-semibold text-white font-display line-clamp-1 group-hover:text-[#A6FF5D] transition-colors duration-200">
                       {project.name}
                     </h2>
                   </div>
 
                   {/* Description */}
-                  <p className="text-xs text-white/60 line-clamp-2">
+                  <p className="text-xs text-white/50 leading-relaxed line-clamp-2">
                     {project.initial_prompt || "No description provided."}
                   </p>
+
+                  <div className="border-t border-neutral-800/80 my-1" />
+
                   {/* Date and buttons */}
                   <div
                     onClick={(e) => e.stopPropagation()}
-                    className="flex justify-between items-center mt-6"
+                    className="flex justify-between items-center"
                   >
                     {/* Date */}
-                    <span className="text-xs text-white/50">
+                    <span className="text-xs text-white/40">
                       {new Date(project.createdAt).toLocaleDateString()}
                     </span>
 
                     {/* Buttons */}
-                    <div className="flex gap-3 text-sm">
+                    <div className="flex gap-2">
                       <button
                         onClick={() => navigate(`/preview/${project.id}`)}
-                        className="bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-full transition text-xs "
+                        className="bg-white/5 hover:bg-white/10 border border-neutral-800 hover:border-neutral-700 text-white/90 px-3 py-1.5 rounded-full transition text-xs font-medium"
                       >
                         Preview
                       </button>
                       <button
                         onClick={() => navigate(`/projects/${project.id}`)}
-                        className="bg-[#A6FF5D] hover:bg-[#A6FF5D]/90 text-gray-900 px-3 py-1.5 rounded-full transition text-xs "
+                        className="bg-[#A6FF5D] hover:bg-[#A6FF5D]/90 text-gray-900 px-3 py-1.5 rounded-full transition text-xs font-medium"
                       >
                         Open
                       </button>
                     </div>
                   </div>
+
                   {deletingId === project.id ? (
-                    <div className="absolute top-3 right-3 flex items-center justify-center size-7">
+                    <div className="absolute top-3 right-3 flex items-center justify-center size-7 bg-neutral-950/80 rounded-lg border border-neutral-800">
                       <Loader2Icon
-                        className="animate-spin text-red-400"
-                        size={18}
+                        className="animate-spin text-[#A6FF5D]"
+                        size={14}
                       />
                     </div>
                   ) : (
@@ -196,19 +200,7 @@ const MyProjects = () => {
                         e.stopPropagation();
                         deleteProject(project.id);
                       }}
-                      className="
-                      absolute top-3 right-3
-                      bg-neutral-900/90 backdrop-blur
-                      border border-neutral-700
-                      text-white/70
-                      hover:text-red-400
-                      hover:border-red-400/60
-                      hover:bg-red-500/10
-                      p-1.5 size-7
-                      rounded-md
-                      cursor-pointer
-                      transition-all duration-200
-                    "
+                      className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-200 bg-neutral-950/90 border border-neutral-800 hover:border-red-500/30 text-white/60 hover:text-red-400 p-1.5 size-7 rounded-lg cursor-pointer z-20"
                     />
                   )}
                 </div>

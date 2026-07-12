@@ -1,4 +1,6 @@
 import { Route, Routes, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import PageTransition from "./components/PageTransition";
 import PreviewPage from "./pages/PreviewPage";
 import Community from "./pages/Community";
 import Pricing from "./pages/Pricing";
@@ -16,7 +18,8 @@ import Settings from "./pages/Settings";
 import Loading from "./pages/Loading";
 
 const App = () => {
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const { pathname } = location;
 
   const heightNavbar =
     (pathname.startsWith("/projects/") && pathname !== "/projects") ||
@@ -29,27 +32,28 @@ const App = () => {
     <div>
       <Toaster />
       {!heightNavbar && <Navbar />}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/pricing" element={<Pricing />} />
-        <Route path="/generate" element={<GeneratePage />} />
-        <Route path="/projects" element={<MyProjects />} />
-        <Route path="/projects/:projectId" element={<Projects />} />
-        <Route path="/preview/:projectId" element={<PreviewPage />} />
-        <Route
-          path="/preview/:projectId/:versionId"
-          element={<PreviewPage />}
-        />
-        <Route path="/community" element={<Community />} />
-        <Route path="/view/:projectId" element={<View />} />
-        <Route path="/auth/:pathname" element={<AuthPage />} />
-        <Route path="/account/settings" element={<Settings />} />
-        <Route path="*" element={<NotFound />} />
-        <Route path="/loading" element={<Loading />} />
-      </Routes>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={pathname}>
+          <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+          <Route path="/pricing" element={<PageTransition><Pricing /></PageTransition>} />
+          <Route path="/generate" element={<PageTransition><GeneratePage /></PageTransition>} />
+          <Route path="/projects" element={<PageTransition><MyProjects /></PageTransition>} />
+          <Route path="/projects/:projectId" element={<PageTransition><Projects /></PageTransition>} />
+          <Route path="/preview/:projectId" element={<PageTransition><PreviewPage /></PageTransition>} />
+          <Route
+            path="/preview/:projectId/:versionId"
+            element={<PageTransition><PreviewPage /></PageTransition>}
+          />
+          <Route path="/community" element={<PageTransition><Community /></PageTransition>} />
+          <Route path="/view/:projectId" element={<PageTransition><View /></PageTransition>} />
+          <Route path="/auth/:pathname" element={<PageTransition><AuthPage /></PageTransition>} />
+          <Route path="/account/settings" element={<PageTransition><Settings /></PageTransition>} />
+          <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+          <Route path="/loading" element={<PageTransition><Loading /></PageTransition>} />
+        </Routes>
+      </AnimatePresence>
       {!heightNavbar && <Footer />}
     </div>
   );
 };
-
 export default App;
