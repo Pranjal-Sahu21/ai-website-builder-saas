@@ -59,7 +59,7 @@ export default function AuthPage() {
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
           className="hidden lg:flex flex-col justify-center px-20 w-1/2 relative mt-14"
         >
-          <h1 className="text-5xl leading-tight">
+          <h1 className="text-5xl lg:text-[80px]/[98px] leading-tight tracking-tight font-light">
             Build web apps <br />
             with <span className="text-[#A6FF5D] italic">AI</span>
           </h1>

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import AnimatedHeadline from "./AnimatedHeadline";
 import "./HeroSection.css";
 
 const HeroSection: React.FC = () => {
@@ -13,19 +14,30 @@ const HeroSection: React.FC = () => {
   };
 
   // Animation Variants
-  const container = {
-    hidden: { opacity: 0 },
+  const descriptionVariant = {
+    hidden: { opacity: 0, y: 20 },
     show: {
       opacity: 1,
+      y: 0,
       transition: {
-        staggerChildren: 0.15,
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1] as const,
+        delay: 1.4, // Staggered after heading animation finishes
       },
     },
   };
 
-  const item = {
-    hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  const buttonsVariant = {
+    hidden: { opacity: 0, y: 20 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1] as const,
+        delay: 1.6, // Staggered after description animation finishes
+      },
+    },
   };
 
   return (
@@ -38,39 +50,24 @@ const HeroSection: React.FC = () => {
       }}
     >
       {/* CENTERED CONTENT WRAPPER */}
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="flex flex-1 flex-col items-center justify-center text-center px-4"
-      >
-        {/* BADGE */}
-        <motion.div
-          variants={item}
-          className="rainbow relative z-0 bg-white/15 overflow-hidden p-px flex items-center justify-center rounded-full mb-6"
-        >
-          <div className="flex items-center gap-3 pl-4 pr-6 py-3 text-white rounded-full bg-neutral-900 backdrop-blur">
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A6FF5D] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-[#A6FF5D]"></span>
-            </span>
-            <span className="text-xs">AI-Powered Website Builder</span>
-          </div>
-        </motion.div>
-
+      <div className="flex flex-1 flex-col items-center justify-center text-center px-4">
         {/* HEADING */}
-        <motion.h1
-          variants={item}
-          className="text-4xl md:text-[64px]/[82px] max-w-4xl leading-tight"
+        <AnimatedHeadline
+          as="h1"
+          className="text-4xl md:text-[80px]/[98px] max-w-5xl leading-tight tracking-tight text-white font-light"
+          triggerOnView={false}
+          stagger={30}
         >
-          Build Stunning Websites  <br />with AI in{" "}
+          Build Stunning Websites <br />with AI in{" "}
           <span className="text-[#A6FF5D] italic">seconds</span>
-        </motion.h1>
+        </AnimatedHeadline>
 
         {/* DESCRIPTION */}
         <motion.p
-          variants={item}
-          className="text-sm md:text-base text-white/70 max-w-lg mt-6"
+          variants={descriptionVariant}
+          initial="hidden"
+          animate="show"
+          className="text-sm md:text-base text-white/70 max-w-lg mt-6 font-light"
         >
           Describe your vision and let AI generate a complete, ready-to-launch
           website tailored to your brand and goals.
@@ -78,12 +75,14 @@ const HeroSection: React.FC = () => {
 
         {/* BUTTONS */}
         <motion.div
-          variants={item}
+          variants={buttonsVariant}
+          initial="hidden"
+          animate="show"
           className="flex min-[375px]:flex-row flex-col gap-3 mt-8 w-[90%] max-w-md justify-center"
         >
           <button
             onClick={() => navigate("/generate")}
-            className="bg-[#A6FF5D] hover:bg-[#A6FF5D]/90 text-gray-900 px-6 py-2.5 rounded-full text-sm transition w-full min-[375px]:w-auto"
+            className="bg-[#A6FF5D] hover:bg-[#A6FF5D]/90 text-gray-900 px-6 py-2.5 rounded-full text-sm transition w-full min-[375px]:w-auto font-medium"
           >
             Generate website
           </button>
@@ -99,7 +98,7 @@ const HeroSection: React.FC = () => {
             See Features
           </button>
         </motion.div>
-      </motion.div>
+      </div>
 
       {/* SCROLL INDICATOR */}
       <motion.div

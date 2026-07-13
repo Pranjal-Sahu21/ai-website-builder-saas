@@ -8,11 +8,20 @@ const container = {
 } as const;
 
 const item = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 70 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6 },
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
+  },
+} as const;
+
+const slideLeftItem = {
+  hidden: { opacity: 0, x: -35 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
   },
 } as const;
 
@@ -26,33 +35,25 @@ const Features = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className="flex items-center flex-col justify-center text-center"
+        className="max-w-6xl mx-auto px-4 text-center md:text-left"
       >
         {/* Heading */}
         <motion.h2
-          variants={item}
-          className="text-white text-3xl md:text-4xl mt-6"
+          variants={slideLeftItem}
+          className="text-white text-4xl md:text-5xl mt-6 tracking-tight text-center md:text-left font-light"
         >
           Built for <span className="text-[#A6FF5D] italic">Speed</span>
         </motion.h2>
 
-        {/* Description */}
-        <motion.p
-          variants={item}
-          className="text-white/50 text-sm max-w-md mx-auto mt-4"
-        >
-          Build and launch websites instantly with AI.
-        </motion.p>
-
         {/* Feature Grid */}
         <motion.div
           variants={container}
-          className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-14"
+          className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-14"
         >
           {/* Feature 1 */}
           <motion.div
             variants={item}
-            className="group bg-neutral-900/80 backdrop-blur border border-neutral-800 rounded-2xl hover:border-[#A6FF5D]/40 transition duration-300 p-6 flex flex-col"
+            className="group bg-neutral-900/80 backdrop-blur border border-neutral-800 rounded-2xl hover:border-[#A6FF5D]/40 transition-colors duration-300 p-6 flex flex-col"
           >
             <div className="w-full aspect-16/10 overflow-hidden rounded-xl bg-neutral-800">
               <img
@@ -75,7 +76,7 @@ const Features = () => {
           {/* Feature 2 */}
           <motion.div
             variants={item}
-            className="group bg-neutral-900/80 backdrop-blur border border-neutral-800 rounded-2xl hover:border-[#A6FF5D]/40 transition duration-300 p-6 flex flex-col"
+            className="group bg-neutral-900/80 backdrop-blur border border-neutral-800 rounded-2xl hover:border-[#A6FF5D]/40 transition-colors duration-300 p-6 flex flex-col"
           >
             <div className="w-full aspect-16/10 overflow-hidden rounded-xl bg-neutral-800">
               <img
@@ -98,7 +99,7 @@ const Features = () => {
           {/* Feature 3 */}
           <motion.div
             variants={item}
-            className="group bg-neutral-900/80 backdrop-blur border border-neutral-800 rounded-2xl hover:border-[#A6FF5D]/40 transition duration-300 p-6 flex flex-col"
+            className="group bg-neutral-900/80 backdrop-blur border border-neutral-800 rounded-2xl hover:border-[#A6FF5D]/40 transition-colors duration-300 p-6 flex flex-col"
           >
             <div className="w-full aspect-16/10 overflow-hidden rounded-xl bg-neutral-800">
               <img

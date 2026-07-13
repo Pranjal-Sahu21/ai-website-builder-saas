@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import favicon from "../assets/favicon.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useScrollToSection from "../hooks/useScrollToSection";
 import { authClient } from "@/lib/auth-client";
 import { UserButton } from "@daveyplate/better-auth-ui";
@@ -15,6 +15,7 @@ const Navbar = () => {
   const [loadingCredits, setLoadingCredits] = useState(false);
 
   const scrollToSection = useScrollToSection();
+  const location = useLocation();
 
   const { data: session } = authClient.useSession();
 
@@ -103,7 +104,7 @@ const Navbar = () => {
             ) : (
               <Link
                 to="/auth/sign-in"
-                className="hidden lg:flex bg-[#A6FF5D] hover:bg-[#A6FF5D]/90 text-gray-900 px-6 py-2 text-sm rounded-full transition"
+                className="hidden lg:flex bg-[#A6FF5D] hover:bg-[#A6FF5D]/90 text-gray-900 px-6 py-2 text-sm rounded-full transition font-medium"
               >
                 Login
               </Link>
@@ -118,8 +119,12 @@ const Navbar = () => {
           >
             <Link
               to="/"
-              onClick={() => {
-                scrollToSection("features");
+              state={{ scrollTo: "features" }}
+              onClick={(e) => {
+                if (location.pathname === "/") {
+                  e.preventDefault();
+                  scrollToSection("features");
+                }
                 setMenuOpen(false);
               }}
               className=" text-white/80 hover:text-[#A6FF5D]"
@@ -144,8 +149,12 @@ const Navbar = () => {
             </Link>
             <Link
               to="/"
-              onClick={() => {
-                scrollToSection("testimonials");
+              state={{ scrollTo: "testimonials" }}
+              onClick={(e) => {
+                if (location.pathname === "/") {
+                  e.preventDefault();
+                  scrollToSection("testimonials");
+                }
                 setMenuOpen(false);
               }}
               className="text-white/80 hover:text-[#A6FF5D]"
@@ -154,8 +163,12 @@ const Navbar = () => {
             </Link>
             <Link
               to="/"
-              onClick={() => {
-                scrollToSection("faq");
+              state={{ scrollTo: "faq" }}
+              onClick={(e) => {
+                if (location.pathname === "/") {
+                  e.preventDefault();
+                  scrollToSection("faq");
+                }
                 setMenuOpen(false);
               }}
               className="text-white/80 hover:text-[#A6FF5D]"
@@ -167,7 +180,7 @@ const Navbar = () => {
             ) : (
               <Link
                 to="/auth/sign-in"
-                className="hidden lg:flex bg-[#A6FF5D] hover:bg-[#A6FF5D]/90 text-gray-900 px-6 py-2 text-sm rounded-full transition"
+                className="hidden lg:flex bg-[#A6FF5D] hover:bg-[#A6FF5D]/90 text-gray-900 px-6 py-2 text-sm rounded-full transition font-medium"
               >
                 Login
               </Link>
@@ -199,7 +212,7 @@ const Navbar = () => {
             // Login button
             <Link
               to="/auth/sign-in"
-              className=" lg:flex border bg-[#A6FF5D] hover:bg-[#A6FF5D]/90 text-gray-900 px-6 py-2 text-sm rounded-full transition"
+              className=" lg:flex border bg-[#A6FF5D] hover:bg-[#A6FF5D]/90 text-gray-900 px-6 py-2 text-sm rounded-full transition font-medium"
             >
               Login
             </Link>

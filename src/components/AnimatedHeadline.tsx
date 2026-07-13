@@ -10,10 +10,18 @@ interface AnimatedHeadlineProps {
   triggerOnView?: boolean;
 }
 
-function flattenChildren(children: ReactNode): { char: string; styled?: string }[] {
-  const result: { char: string; styled?: string }[] = [];
+interface CharItem {
+  char: string;
+  styled?: string;
+  isBr?: boolean;
+}
+
+function flattenChildren(children: ReactNode): CharItem[] {
+  const result: CharItem[] = [];
 
   const processNode = (node: ReactNode, styledClass?: string): void => {
+    if (node === null || node === undefined) return;
+
     if (typeof node === "string") {
       for (const char of node) {
         result.push({ char, styled: styledClass });
@@ -24,13 +32,17 @@ function flattenChildren(children: ReactNode): { char: string; styled?: string }
       }
     } else if (Array.isArray(node)) {
       node.forEach((child) => processNode(child, styledClass));
-    } else if (node && typeof node === "object" && "props" in node) {
-      const element = node as React.ReactElement<{
-        className?: string;
-        children?: ReactNode;
-      }>;
-      const childClass = element.props.className || "";
-      processNode(element.props.children, childClass);
+    } else if (typeof node === "object" && "type" in node) {
+      const element = node as any;
+      if (element.type === "br" || element.type === "BR") {
+        result.push({ char: "\n", isBr: true });
+      } else if (element.props) {
+        const childClass = element.props.className || "";
+        processNode(
+          element.props.children,
+          childClass ? `${styledClass || ""} ${childClass}`.trim() : styledClass
+        );
+      }
     }
   };
 
@@ -71,6 +83,44 @@ const AnimatedHeadline: React.FC<AnimatedHeadlineProps> = ({
 
   const chars = flattenChildren(children);
 
+  // Group characters into words to prevent letters of a single word wrapping across lines
+  type WordItem = {
+    isSpace?: boolean;
+    isBr?: boolean;
+    letters?: CharItem[];
+  };
+
+  const groupIntoWords = (items: CharItem[]): WordItem[] => {
+    const words: WordItem[] = [];
+    let currentWord: CharItem[] = [];
+
+    for (const item of items) {
+      if (item.isBr) {
+        if (currentWord.length > 0) {
+          words.push({ letters: currentWord });
+          currentWord = [];
+        }
+        words.push({ isBr: true });
+      } else if (item.char === " ") {
+        if (currentWord.length > 0) {
+          words.push({ letters: currentWord });
+          currentWord = [];
+        }
+        words.push({ isSpace: true });
+      } else {
+        currentWord.push(item);
+      }
+    }
+
+    if (currentWord.length > 0) {
+      words.push({ letters: currentWord });
+    }
+
+    return words;
+  };
+
+  const words = groupIntoWords(chars);
+
   return (
     <Tag
       ref={ref as React.Ref<HTMLHeadingElement>}
@@ -84,31 +134,50 @@ const AnimatedHeadline: React.FC<AnimatedHeadlineProps> = ({
       <span className="ah-sr-only">{children}</span>
 
       <span className="ah-letters" aria-hidden="true">
-        {chars.map((item, i) => {
-          const delay = i * stagger;
+        {(() => {
+          let globalIndex = 0;
+          return words.map((word, wordIdx) => {
+            if (word.isBr) {
+              return <br key={`br-${wordIdx}`} />;
+            }
 
-          if (item.char === " ") {
+            if (word.isSpace) {
+              globalIndex++;
+              return (
+                <span key={`space-${wordIdx}`} className="ah-space">
+                  {"\u00A0"}
+                </span>
+              );
+            }
+
             return (
-              <span key={i} className="ah-space">
-                {"\u00A0"}
+              <span
+                key={`word-${wordIdx}`}
+                className="ah-word"
+                style={{ display: "inline-block", whiteSpace: "nowrap" }}
+              >
+                {word.letters?.map((item, letterIdx) => {
+                  const delay = globalIndex * stagger;
+                  globalIndex++;
+
+                  return (
+                    <span
+                      key={`letter-${letterIdx}`}
+                      className={`ah-letter ${isVisible ? "ah-animate" : ""} ${item.styled || ""}`}
+                      style={
+                        {
+                          "--ah-delay": `${delay}ms`,
+                        } as React.CSSProperties
+                      }
+                    >
+                      {item.char}
+                    </span>
+                  );
+                })}
               </span>
             );
-          }
-
-          return (
-            <span
-              key={i}
-              className={`ah-letter ${isVisible ? "ah-animate" : ""} ${item.styled || ""}`}
-              style={
-                {
-                  "--ah-delay": `${delay}ms`,
-                } as React.CSSProperties
-              }
-            >
-              {item.char}
-            </span>
-          );
-        })}
+          });
+        })()}
       </span>
     </Tag>
   );

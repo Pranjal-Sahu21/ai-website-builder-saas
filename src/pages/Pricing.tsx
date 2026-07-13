@@ -8,18 +8,27 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
+import AnimatedHeadline from "../components/AnimatedHeadline";
+
 
 // Animation settings
 const container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.15 },
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.9, // Snappier reveal matching accelerated title stagger
+    },
   },
 };
 const item = {
-  hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  hidden: { opacity: 0, y: 60 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
+  },
 };
 
 // Next Arrow UI
@@ -145,22 +154,17 @@ const Pricing: React.FC = () => {
       id="pricing"
     >
       {/* Heading */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="flex flex-col items-center text-center max-w-4xl mx-auto mt-12 md:mt-0"
-      >
-        <h2 className="text-white text-3xl md:text-4xl mt-10">
+      <div className="flex flex-col items-center text-center max-w-4xl mx-auto mt-12 md:mt-0">
+        <AnimatedHeadline
+          as="h2"
+          className="text-white text-4xl md:text-5xl mt-10 tracking-tight text-center font-light"
+          triggerOnView={true}
+          stagger={20}
+        >
           Choose your perfect{" "}
           <span className="text-[#A6FF5D] italic">plan</span>
-        </h2>
-
-        <p className="text-white/50 text-sm max-w-md mx-auto mt-4">
-          Plans for creators and teams to launch fast.
-        </p>
-      </motion.div>
+        </AnimatedHeadline>
+      </div>
 
       {/* Desktop Grid */}
       <motion.div

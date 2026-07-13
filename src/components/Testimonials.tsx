@@ -103,6 +103,15 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
+const slideRightItem = {
+  hidden: { opacity: 0, x: 35 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+  },
+} as const;
+
 const Testimonials = () => {
   return (
     <section
@@ -114,20 +123,12 @@ const Testimonials = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className="relative max-w-6xl mx-auto text-center"
+        className="relative max-w-6xl mx-auto text-center md:text-right"
       >
         {/* Heading */}
-        <motion.h2 variants={item} className="text-white text-3xl md:text-4xl">
+        <motion.h2 variants={slideRightItem} className="text-white text-4xl md:text-5xl tracking-tight text-center md:text-right font-light">
           Trusted for <span className="text-[#A6FF5D] italic">Performance</span>
         </motion.h2>
-
-        {/* Description */}
-        <motion.p
-          variants={item}
-          className="text-white/50 text-sm max-w-md mx-auto mt-4"
-        >
-          Real feedback from people building with AI.
-        </motion.p>
 
         {/* Rows */}
         <div className="space-y-8 mt-16">

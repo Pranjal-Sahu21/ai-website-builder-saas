@@ -5,18 +5,27 @@ import { Link, useNavigate } from "react-router-dom";
 import api from "@/configs/axios.config";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
+import AnimatedHeadline from "../components/AnimatedHeadline";
+
 
 // Animation settings
 const container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.1 },
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 1.3,
+    },
   },
 };
 const item = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+  hidden: { opacity: 0, y: 60 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
+  },
 };
 
 const Community = () => {
@@ -66,9 +75,13 @@ const Community = () => {
             transition={{ duration: 0.5 }}
             className="flex flex-col sm:flex-row items-center justify-between mb-12 gap-6"
           >
-            <h1 className="text-3xl sm:text-4xl text-white">
+            <AnimatedHeadline
+              as="h1"
+              className="text-4xl sm:text-5xl text-white tracking-tight font-light"
+              triggerOnView={false}
+            >
               Published <span className="text-[#A6FF5D] italic">Projects</span>
-            </h1>
+            </AnimatedHeadline>
           </motion.div>
 
           {/* Projects Grid */}
@@ -88,7 +101,7 @@ const Community = () => {
                 <Link
                   to={`/view/${project.id}`}
                   target="_blank"
-                  className="block group rounded-2xl overflow-hidden bg-neutral-900/40 hover:bg-neutral-900/70 border border-neutral-800 hover:border-[#A6FF5D]/30 hover:shadow-[0_0_30px_rgba(166,255,93,0.02)] transition-all duration-300"
+                  className="block group rounded-2xl overflow-hidden bg-neutral-900/40 hover:bg-neutral-900/70 border border-neutral-800 hover:border-[#A6FF5D]/30 hover:shadow-[0_0_30px_rgba(166,255,93,0.02)] transition-colors duration-300"
                 >
                   {/* Preview */}
                   <div className="relative w-full h-44 overflow-hidden rounded-t-2xl bg-neutral-950 border-b border-neutral-800/50">

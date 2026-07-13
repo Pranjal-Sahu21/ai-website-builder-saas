@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Sparkles, Loader2Icon } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSession } from "@/lib/auth-client";
 import { toast } from "sonner";
 import api from "@/configs/axios.config";
@@ -55,12 +55,19 @@ export default function GeneratePage() {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.15 },
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 1.1, // Stagger elements after headline blur-in finishes
+      },
     },
   };
   const item = {
-    hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    hidden: { opacity: 0, y: 50 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
+    },
   };
 
   return (
@@ -102,91 +109,80 @@ export default function GeneratePage() {
       )}
 
       {/* CONTENT */}
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="relative z-10 w-full max-w-3xl text-center"
-      >
-        {/* Badge */}
-        <motion.div variants={item} className="flex justify-center mb-12">
-          <div className="rainbow relative z-0 bg-white/15 overflow-hidden p-px flex items-center justify-center rounded-full">
-            <div className="flex items-center gap-3 pl-4 pr-6 py-2 text-white rounded-full bg-neutral-900 backdrop-blur">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A6FF5D] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-[#A6FF5D]"></span>
-              </span>
-
-              <Link
-                to="/pricing"
-                className="text-xs tracking-wide cursor-pointer"
-              >
-                Change your plan
-              </Link>
-            </div>
-          </div>
-        </motion.div>
-
+      <div className="relative z-10 w-full max-w-3xl text-center">
         {/* Heading */}
-        <motion.div variants={item}>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="mb-8"
+        >
           <AnimatedHeadline
             as="h1"
-            className="text-4xl md:text-5xl font-medium"
+            className="text-5xl md:text-6xl font-light tracking-tight"
             triggerOnView={false}
           >
             Hi, <span className="text-[#A6FF5D] italic">{username}</span> !
           </AnimatedHeadline>
         </motion.div>
 
-        <motion.p variants={item} className="text-white/60 mt-4 text-sm">
-          What would you like to build today?
-        </motion.p>
-
-        {/* FORM */}
-        <motion.form variants={item} onSubmit={handleSubmit} className="mt-10">
-          <div className="relative bg-neutral-950 rounded-2xl shadow-[0_0_80px_rgba(0,0,0,0.9)]">
-            <textarea
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              placeholder="Build a SaaS dashboard with authentication..."
-              className="w-full h-36 bg-neutral-950 border border-neutral-800 rounded-xl px-5 py-4 pr-16 text-sm outline-none focus:border-[#A6FF5D]/40 resize-none"
-            />
-
-            <motion.button
-              whileHover={{ opacity: 0.9 }}
-              type="submit"
-              disabled={loading}
-              className="absolute bottom-6 right-6 flex items-center justify-center bg-[#A6FF5D] text-black p-3 rounded-lg hover:brightness-110 disabled:cursor-not-allowed transition disabled:opacity-50"
-            >
-              {loading ? (
-                <Loader2Icon size={18} className="animate-spin" />
-              ) : (
-                <Sparkles size={18} />
-              )}
-            </motion.button>
-          </div>
-        </motion.form>
-
-        {/* Suggestions */}
+        {/* Staggered Content Container */}
         <motion.div
-          variants={item}
-          className="mt-8 hidden md:flex flex-wrap justify-center gap-3 text-sm"
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="w-full flex flex-col items-center"
         >
-          {[
-            "Create a blog platform",
-            "Make a task manager",
-            "Build a landing page",
-          ].map((idea) => (
-            <motion.button
-              key={idea}
-              onClick={() => setPrompt(idea)}
-              className="px-4 py-2 bg-neutral-900 border border-neutral-600 rounded-full hover:border-[#A6FF5D]/40 hover:text-[#A6FF5D] transition"
-            >
-              {idea}
-            </motion.button>
-          ))}
+          <motion.p variants={item} className="text-white/60 text-sm">
+            What would you like to build today?
+          </motion.p>
+
+          {/* FORM */}
+          <motion.form variants={item} onSubmit={handleSubmit} className="mt-8 w-full">
+            <div className="relative bg-neutral-950 rounded-2xl shadow-[0_0_80px_rgba(0,0,0,0.9)]">
+              <textarea
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                placeholder="Build a SaaS dashboard with authentication..."
+                className="w-full h-36 bg-neutral-950 border border-neutral-800 rounded-xl px-5 py-4 pr-16 text-sm outline-none focus:border-[#A6FF5D]/40 resize-none"
+              />
+
+              <motion.button
+                whileHover={{ opacity: 0.9 }}
+                type="submit"
+                disabled={loading}
+                className="absolute bottom-6 right-6 flex items-center justify-center bg-[#A6FF5D] text-black p-3 rounded-lg hover:brightness-110 disabled:cursor-not-allowed transition disabled:opacity-50"
+              >
+                {loading ? (
+                  <Loader2Icon size={18} className="animate-spin" />
+                ) : (
+                  <Sparkles size={18} />
+                )}
+              </motion.button>
+            </div>
+          </motion.form>
+
+          {/* Suggestions */}
+          <motion.div
+            variants={item}
+            className="mt-8 hidden md:flex flex-wrap justify-center gap-3 text-sm"
+          >
+            {[
+              "Create a blog platform",
+              "Make a task manager",
+              "Build a landing page",
+            ].map((idea) => (
+              <motion.button
+                key={idea}
+                onClick={() => setPrompt(idea)}
+                className="px-4 py-2 bg-neutral-900 border border-neutral-600 rounded-full hover:border-[#A6FF5D]/40 hover:text-[#A6FF5D] transition"
+              >
+                {idea}
+              </motion.button>
+            ))}
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   );
 }
