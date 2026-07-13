@@ -35,16 +35,16 @@ const CTASection = () => {
   const { data: session } = authClient.useSession();
 
   return (
-    <section className="bg-black py-28 px-4 relative overflow-hidden flex items-center justify-center">
+    <section className="bg-black py-28 lg:py-48 px-4 relative overflow-hidden flex items-center justify-center">
       {/* Background Accent Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#A6FF5D]/5 blur-[160px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#A6FF5D]/5 blur-[200px] rounded-full pointer-events-none" />
 
       <motion.div
         variants={container}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className="relative z-10 max-w-5xl w-full bg-neutral-900/70 border border-neutral-800/80 rounded-3xl p-6 sm:p-10 md:p-14 backdrop-blur-sm"
+        className="relative z-10 max-w-5xl w-full bg-neutral-900/70 border border-neutral-800/80 rounded-3xl p-6 sm:p-10 md:p-14 lg:py-16 lg:px-20 backdrop-blur-md"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* Left Side: Main Text */}

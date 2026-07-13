@@ -46,7 +46,7 @@ const item = {
 
 
 const slideRightItem = {
-  hidden: { opacity: 0, x: 35 },
+  hidden: { opacity: 0, x: 70 },
   show: {
     opacity: 1,
     x: 0,
