@@ -3,6 +3,7 @@ import { Mail, MapPin, MessageSquare, Send, Sparkles } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
 import { toast } from "sonner";
 import AnimatedHeadline from "../components/AnimatedHeadline";
+import SEO from "../components/SEO";
 
 const CONTACT_PLACEHOLDERS = [
   "I need help integrating a payment gateway...",
@@ -103,6 +104,11 @@ export default function ContactPage() {
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-start px-6 bg-black text-white overflow-hidden pb-24">
+      <SEO
+        title="Contact Our Team"
+        description="Have questions about Genixor? Get in touch with our team for support, feature requests, partnership queries, or custom plan inquiries."
+        keywords="contact Genixor, support email, developer feedback, custom website builder help"
+      />
       {/* HEADER */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}

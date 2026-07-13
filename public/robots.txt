@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /auth/
+Disallow: /account/
+Disallow: /loading
+
+Sitemap: https://genixor.netlify.app/sitemap.xml

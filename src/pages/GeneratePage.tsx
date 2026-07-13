@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import api from "@/configs/axios.config";
 import { motion } from "framer-motion";
 import AnimatedHeadline from "../components/AnimatedHeadline";
+import SEO from "../components/SEO";
 
 const PLACEHOLDERS = [
   "SaaS dashboard with analytics...",
@@ -121,6 +122,11 @@ export default function GeneratePage() {
 
   return (
     <div className="relative -mb-20 min-h-screen flex items-center justify-center px-6 bg-black text-white overflow-hidden">
+      <SEO
+        title="Create a New AI Website"
+        description="Describe your idea or brand concept, and watch our AI designer build, layout, and style a custom responsive landing page instantly."
+        keywords="generate website, AI landing page creator, custom web design generator, prompt to website"
+      />
       {/* TOP ACCENT GLOW */}
       <div className="absolute left-[24%] w-175 h-175 bg-[#A6FF5D]/10 blur-[160px] rounded-full" />
 

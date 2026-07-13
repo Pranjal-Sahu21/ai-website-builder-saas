@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { useSession } from "@/lib/auth-client";
 import { motion } from "framer-motion";
 import AnimatedHeadline from "../components/AnimatedHeadline";
+import SEO from "../components/SEO";
 
 
 // Animation settings
@@ -84,6 +85,11 @@ const MyProjects = () => {
     <div
       className="px-4 md:px-16 lg:px-24 xl:px-32 bg-black min-h-screen text-white font-geist mt-20"
     >
+      <SEO
+        title="My Projects Dashboard"
+        description="View, manage, edit, preview, and organize all your AI-generated website projects in one dashboard."
+        keywords="project dashboard, manage website projects, edit generated sites"
+      />
       {loading ? (
         <motion.div
           initial={{ opacity: 0 }}

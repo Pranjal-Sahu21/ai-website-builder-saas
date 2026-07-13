@@ -4,6 +4,7 @@ import { ArrowUpRightFromSquare } from "lucide-react";
 import { motion } from "framer-motion";
 import { useSession } from "@/lib/auth-client";
 import { useEffect } from "react";
+import SEO from "../../components/SEO";
 
 type FeatureProps = {
   title: string;
@@ -32,6 +33,11 @@ export default function AuthPage() {
 
   return (
     <div className="relative min-h-screen flex bg-black text-white overflow-hidden">
+      <SEO
+        title={pathname === "sign-up" ? "Sign Up & Start Building" : "Sign In to Your Account"}
+        description="Access Genixor. Sign in or register to prompt, generate, tweak, and deploy custom responsive websites instantly."
+        keywords="Genixor login, create account, sign in web builder, register developers"
+      />
       {/* GRID BACKGROUND */}
       <div
         className="absolute inset-0"

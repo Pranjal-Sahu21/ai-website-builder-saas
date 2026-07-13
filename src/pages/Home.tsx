@@ -7,6 +7,7 @@ import Testimonials from "../components/Testimonials";
 import StatsSection from "../components/StatsSection";
 import CTASection from "../components/CTASection";
 import { useSession } from "@/lib/auth-client";
+import SEO from "../components/SEO";
 
 const Home = () => {
   const { data: session, isPending } = useSession();
@@ -44,6 +45,11 @@ const Home = () => {
 
   return (
     <div>
+      <SEO
+        title="Build AI Websites Instantly"
+        description="Genixor is an intelligent AI website builder that lets you create premium, production-ready landing pages and websites in seconds. Zero coding required."
+        keywords="AI website builder, instant landing pages, zero code generator, web design, responsive templates, React templates, Genixor"
+      />
       <HeroSection />
       <Features />
       <Testimonials />

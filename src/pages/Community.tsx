@@ -6,6 +6,7 @@ import api from "@/configs/axios.config";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import AnimatedHeadline from "../components/AnimatedHeadline";
+import SEO from "../components/SEO";
 
 
 // Animation settings
@@ -55,6 +56,11 @@ const Community = () => {
     <div
       className="px-4 md:px-16 lg:px-24 xl:px-32 bg-black min-h-screen text-white font-geist mt-20"
     >
+      <SEO
+        title="Discover Community Creations"
+        description="Explore premium AI-generated websites, landing pages, and templates created by the Genixor builder community."
+        keywords="Genixor templates, website design gallery, AI landing pages community, discover web designs"
+      />
       {loading ? (
         <motion.div
           initial={{ opacity: 0 }}

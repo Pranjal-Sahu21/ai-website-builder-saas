@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import AnimatedHeadline from "../components/AnimatedHeadline";
+import SEO from "../components/SEO";
 
 
 // Animation settings
@@ -153,6 +154,11 @@ const Pricing: React.FC = () => {
       className="bg-black py-20 px-4 pb-32"
       id="pricing"
     >
+      <SEO
+        title="Flexible Pricing & Credits"
+        description="Choose the perfect plan for your project needs. Get AI generation credits to design, generate, and customize premium websites instantly."
+        keywords="Genixor pricing, AI website builder cost, pricing plans, website generator credits, buy credits"
+      />
       {/* Heading */}
       <div className="flex flex-col items-center text-center max-w-4xl mx-auto mt-12 md:mt-0">
         <AnimatedHeadline
