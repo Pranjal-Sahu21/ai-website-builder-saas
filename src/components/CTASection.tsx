@@ -86,9 +86,15 @@ const CTASection = () => {
                   className="w-9 h-9 rounded-full border-2 border-neutral-900 object-cover"
                 />
               </div>
-              <p className="text-white/70 text-sm">
-                Join <span className="text-white font-medium">1,000+ creators</span> building fast
-              </p>
+              <div className="flex items-center gap-2">
+                <p className="text-white/70 text-sm">
+                  Join <span className="text-white font-medium">1,000+ creators</span> building fast
+                </p>
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A6FF5D] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#A6FF5D]"></span>
+                </span>
+              </div>
             </div>
 
             {/* Buttons */}

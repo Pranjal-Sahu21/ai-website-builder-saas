@@ -4,6 +4,7 @@ import FAQSection from "../components/FAQSection";
 import Features from "../components/Features";
 import HeroSection from "../components/HeroSection";
 import Testimonials from "../components/Testimonials";
+import StatsSection from "../components/StatsSection";
 import CTASection from "../components/CTASection";
 import { useSession } from "@/lib/auth-client";
 
@@ -46,6 +47,7 @@ const Home = () => {
       <HeroSection />
       <Features />
       <Testimonials />
+      <StatsSection />
       <FAQSection />
       <CTASection />
     </div>

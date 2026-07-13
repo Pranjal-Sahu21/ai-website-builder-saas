@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { ScrollVelocityContainer, ScrollVelocityRow } from "./ScrollVelocity";
 
 // Testimonials data
 const testimonials = [
@@ -131,90 +132,67 @@ const Testimonials = () => {
         </motion.h2>
 
         {/* Rows */}
-        <div className="space-y-8 mt-16">
-          {[0, 1].map((row) => {
-            const rowTestimonials = testimonials.slice(row * 3, row * 3 + 3);
-            const animation =
-              row === 0 ? "animate-scroll" : "animate-scroll-reverse";
+        <div className="space-y-8 mt-16 relative w-full overflow-hidden py-4">
+          <ScrollVelocityContainer className="space-y-8">
+            {[0, 1].map((row) => {
+              const rowTestimonials = row === 0 ? testimonials.slice(0, 7) : testimonials.slice(7, 14);
+              const dir = row === 0 ? 1 : -1;
 
-            return (
-              <motion.div
-                key={row}
-                variants={item}
-                className="relative overflow-hidden w-full"
-              >
-                {/* Gradient Left */}
-                <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-linear-to-r from-black to-transparent z-10 pointer-events-none" />
+              return (
+                <motion.div
+                  key={row}
+                  variants={item}
+                  className="w-full"
+                >
+                  <ScrollVelocityRow baseVelocity={row === 0 ? 1.5 : 1.8} direction={dir}>
+                    <div className="flex gap-4 sm:gap-6 pr-4 sm:pr-6">
+                      {rowTestimonials.map((item, index) => (
+                        <div
+                          key={index}
+                          className="bg-neutral-900/80 backdrop-blur border border-neutral-800 hover:border-[#A6FF5D]/40 transition duration-300 rounded-2xl p-4 sm:p-5 shrink-0 w-65 sm:w-75 md:w-85 whitespace-normal"
+                        >
+                          {/* Stars */}
+                          <div className="flex mb-2.5 text-[#A6FF5D] text-xs">
+                            {Array(5)
+                              .fill(0)
+                              .map((_, i) => (
+                                <span key={i}>★</span>
+                              ))}
+                          </div>
 
-                {/* Gradient Right */}
-                <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-linear-to-l from-black to-transparent z-10 pointer-events-none" />
+                          {/* Text */}
+                          <p className="text-white/60 text-xs md:text-[13px] mb-4 text-left leading-relaxed">
+                            {item.text}
+                          </p>
 
-                {/* Scrolling Row */}
-                <div className={`flex gap-4 sm:gap-6 w-max ${animation}`}>
-                  {[...rowTestimonials, ...rowTestimonials].map(
-                    (item, index) => (
-                      <div
-                        key={index}
-                        className="bg-neutral-900/80 backdrop-blur border border-neutral-800 hover:border-[#A6FF5D]/40 transition duration-300 rounded-2xl p-5 sm:p-6 shrink-0 w-65 sm:w-75 md:w-85"
-                      >
-                        {/* Stars */}
-                        <div className="flex mb-4 text-[#A6FF5D] text-sm">
-                          {Array(5)
-                            .fill(0)
-                            .map((_, i) => (
-                              <span key={i}>★</span>
-                            ))}
-                        </div>
-
-                        {/* Text */}
-                        <p className="text-white/60 text-sm mb-6 text-left leading-relaxed">
-                          {item.text}
-                        </p>
-
-                        {/* User */}
-                        <div className="flex items-center gap-3">
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                            className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover border border-neutral-700"
-                          />
-                          <div className="text-left">
-                            <p className="text-white text-sm">{item.name}</p>
-                            <p className="text-white/40 text-xs">{item.role}</p>
+                          {/* User */}
+                          <div className="flex items-center gap-2.5">
+                            <img
+                              src={item.image}
+                              alt={item.name}
+                              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border border-neutral-700"
+                            />
+                            <div className="text-left">
+                              <p className="text-white text-xs sm:text-sm">{item.name}</p>
+                              <p className="text-white/40 text-[10px] sm:text-xs">{item.role}</p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ),
-                  )}
-                </div>
-              </motion.div>
-            );
-          })}
+                      ))}
+                    </div>
+                  </ScrollVelocityRow>
+                </motion.div>
+              );
+            })}
+          </ScrollVelocityContainer>
+
+          {/* Gradient Left */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-r from-black via-black/80 to-transparent z-20 pointer-events-none" />
+
+          {/* Gradient Right */}
+          <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-40 bg-gradient-to-l from-black via-black/80 to-transparent z-20 pointer-events-none" />
         </div>
       </motion.div>
-
-      {/* Marquee animation */}
-      <style>
-        {`
-          @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-
-          @keyframes scrollReverse {
-            0% { transform: translateX(-50%); }
-            100% { transform: translateX(0); }
-          }
-
-          .animate-scroll {
-            animation: scroll 18s linear infinite;
-          }
-
-          .animate-scroll-reverse {
-            animation: scrollReverse 18s linear infinite;
-          }
-        `}
-      </style>
     </section>
   );
 };

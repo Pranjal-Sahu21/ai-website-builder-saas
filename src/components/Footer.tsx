@@ -1,6 +1,7 @@
 import { Twitter, Github, Linkedin, Youtube, Instagram } from "lucide-react";
 import favicon from "../assets/favicon.svg";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Footer = () => {
   return (
@@ -122,12 +123,17 @@ const Footer = () => {
           <p className="text-neutral-500 text-sm">All rights reserved.</p>
         </div>
 
-        {/* Neon Glow Text */}
-        <div className="relative mt-10">
-          <div className="absolute inset-x-0 bottom-0 mx-auto w-full max-w-3xl h-full max-h-64 bg-[#A6FF5D] rounded-full blur-[150px] pointer-events-none"></div>
-          <h1 className="text-center font-extrabold leading-[0.7] text-transparent text-[clamp(3rem,15vw,15rem)] [-webkit-text-stroke:1px_#0D542B] mt-6">
+        {/* Giant footer brand text */}
+        <div className="relative mt-8 -mx-4 sm:-mx-8 md:-mx-16 lg:-mx-28 select-none">
+          <motion.h1
+            initial={{ opacity: 0, y: 150 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center font-extrabold leading-[0.75] text-neutral-900 text-[clamp(4rem,23vw,28rem)] tracking-tighter w-full block"
+          >
             Genixor
-          </h1>
+          </motion.h1>
         </div>
       </footer>
     </div>

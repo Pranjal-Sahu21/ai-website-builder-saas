@@ -7,9 +7,58 @@ import api from "@/configs/axios.config";
 import { motion } from "framer-motion";
 import AnimatedHeadline from "../components/AnimatedHeadline";
 
+const PLACEHOLDERS = [
+  "SaaS dashboard with analytics...",
+  "minimalist photography portfolio...",
+  "streetwear e-commerce store...",
+  "task manager with kanban board...",
+  "food delivery landing page...",
+];
+
+function useTypingPlaceholder(placeholders: string[], typingSpeed = 50, deletingSpeed = 30, pauseDuration = 2000) {
+  const [placeholder, setPlaceholder] = useState("");
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+    const currentFullText = placeholders[currentIdx];
+
+    if (!isDeleting) {
+      // Typing phase
+      if (placeholder.length < currentFullText.length) {
+        timer = setTimeout(() => {
+          setPlaceholder(currentFullText.slice(0, placeholder.length + 1));
+        }, typingSpeed);
+      } else {
+        // Full text reached, pause before deleting
+        timer = setTimeout(() => {
+          setIsDeleting(true);
+        }, pauseDuration);
+      }
+    } else {
+      // Deleting phase
+      if (placeholder.length > 0) {
+        timer = setTimeout(() => {
+          setPlaceholder(currentFullText.slice(0, placeholder.length - 1));
+        }, deletingSpeed);
+      } else {
+        // Fully deleted, move to next item
+        setIsDeleting(false);
+        setCurrentIdx((prevIdx) => (prevIdx + 1) % placeholders.length);
+      }
+    }
+
+    return () => clearTimeout(timer);
+  }, [placeholder, isDeleting, currentIdx, placeholders, typingSpeed, deletingSpeed, pauseDuration]);
+
+  return placeholder;
+}
+
 export default function GeneratePage() {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
+  const animatedPlaceholder = useTypingPlaceholder(PLACEHOLDERS);
 
   const { data: session, isPending } = useSession();
   const username = session?.user?.name?.split(" ")[0] || "User";
@@ -143,8 +192,8 @@ export default function GeneratePage() {
               <textarea
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
-                placeholder="Build a SaaS dashboard with authentication..."
-                className="w-full h-36 bg-neutral-950 border border-neutral-800 rounded-xl px-5 py-4 pr-16 text-sm outline-none focus:border-[#A6FF5D]/40 resize-none"
+                placeholder={`Build a ${animatedPlaceholder}`}
+                className="w-full h-36 bg-neutral-950 border border-neutral-800 rounded-xl px-5 py-4 pr-16 text-sm outline-none focus:border-[#A6FF5D]/40 resize-none animate-placeholder"
               />
 
               <motion.button
