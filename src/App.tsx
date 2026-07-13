@@ -16,6 +16,7 @@ import { Toaster } from "sonner";
 import AuthPage from "./pages/auth/AuthPage";
 import Settings from "./pages/Settings";
 import Loading from "./pages/Loading";
+import ContactPage from "./pages/ContactPage";
 
 const App = () => {
   const location = useLocation();
@@ -48,6 +49,7 @@ const App = () => {
           <Route path="/view/:projectId" element={<PageTransition><View /></PageTransition>} />
           <Route path="/auth/:pathname" element={<PageTransition><AuthPage /></PageTransition>} />
           <Route path="/account/settings" element={<PageTransition><Settings /></PageTransition>} />
+          <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
           <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
           <Route path="/loading" element={<PageTransition><Loading /></PageTransition>} />
         </Routes>

@@ -70,14 +70,15 @@ const Navbar = () => {
     { label: "Projects", to: "/projects" },
     { label: "Community", to: "/community" },
     { label: "Pricing", to: "/pricing" },
+    { label: "Contact", to: "/contact" },
   ];
 
   const guestLinks: NavLinkItem[] = [
     { label: "Features", to: "/", sectionId: "features" },
     { label: "Community", to: "/community" },
     { label: "Pricing", to: "/pricing" },
-    { label: "Testimonials", to: "/", sectionId: "testimonials" },
     { label: "FAQs", to: "/", sectionId: "faq" },
+    { label: "Contact", to: "/contact" },
   ];
 
   return (
@@ -89,14 +90,14 @@ const Navbar = () => {
       flex flex-col items-center justify-center
       bg-black/10 backdrop-blur-3xl"
     >
-      <div className="flex items-center justify-between p-4 md:px-16 lg:px-24 xl:px-32 md:py-4 w-full">
+      <div className="relative flex items-center justify-between p-4 md:px-16 lg:px-24 xl:px-32 md:py-4 w-full">
         {/* Logo */}
         <Link to="/" className="text-xl text-white flex items-center gap-2">
           <img src={favicon} alt="logo" className="h-8 w-8" /> Genixor
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <div className="hidden lg:flex items-center gap-8 text-sm">
+        {/* Desktop Navigation Links (Centered) */}
+        <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 text-sm">
           {(session ? authenticatedLinks : guestLinks).map((link, idx) => (
             <Link
               key={idx}
@@ -108,12 +109,15 @@ const Navbar = () => {
                   scrollToSection(link.sectionId);
                 }
               }}
-              className="text-white/80 hover:text-[#A6FF5D] transition font-medium"
+              className="text-white/80 hover:text-[#A6FF5D] transition font-light"
             >
               {link.label}
             </Link>
           ))}
+        </div>
 
+        {/* Desktop Controls (Right side) */}
+        <div className="hidden lg:flex items-center gap-4 text-sm">
           {session ? (
             <div className="flex gap-4 justify-center items-center">
               <span className="text-white/80 gap-1 flex">
