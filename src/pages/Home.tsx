@@ -46,9 +46,9 @@ const Home = () => {
   return (
     <div>
       <SEO
-        title="Build AI Websites Instantly"
+        title="Genixor - AI-powered Website Builder"
         description="Genixor is an intelligent AI website builder that lets you create premium, production-ready landing pages and websites in seconds. Zero coding required."
-        keywords="AI website builder, instant landing pages, zero code generator, web design, responsive templates, React templates, Genixor"
+        keywords="Genixor, AI website builder, instant landing pages, zero code generator, web design, responsive templates, React templates"
       />
       <HeroSection />
       <Features />
