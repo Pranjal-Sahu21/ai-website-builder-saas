@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import community from "../assets/Community_Image.png";
 
 const container = {
   hidden: {},
@@ -8,7 +9,7 @@ const container = {
 } as const;
 
 const item = {
-  hidden: { opacity: 0},
+  hidden: { opacity: 0 },
   show: {
     opacity: 1,
     y: 0,
@@ -16,8 +17,8 @@ const item = {
   },
 } as const;
 
-const slideLeftItem = {
-  hidden: { opacity: 0, x: -70 },
+const slideRightItem = {
+  hidden: { opacity: 0, x: 70 },
   show: {
     opacity: 1,
     x: 0,
@@ -27,20 +28,17 @@ const slideLeftItem = {
 
 const Features = () => {
   return (
-    <section
-      id="features"
-      className="bg-black py-20 px-4"
-    >
+    <section id="features" className="bg-black py-20 px-4">
       <motion.div
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className="max-w-6xl mx-auto px-4 text-center md:text-left"
+        className="max-w-6xl mx-auto px-4 flex flex-col items-center md:items-end text-center md:text-right"
       >
         {/* Heading */}
         <motion.h2
-          variants={slideLeftItem}
-          className="text-white text-4xl md:text-5xl mt-6 tracking-tight text-center md:text-left font-light"
+          variants={slideRightItem}
+          className="text-white text-4xl md:text-5xl mt-6 tracking-tight text-center md:text-right font-light"
         >
           Built for <span className="text-[#A6FF5D] italic">Speed</span>
         </motion.h2>
@@ -107,20 +105,20 @@ const Features = () => {
           >
             <div className="w-full aspect-16/10 overflow-hidden bg-neutral-800 border-b border-neutral-800/80">
               <img
-                src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200"
-                alt="deployment"
+                src={community}
+                alt="community"
                 className="w-full h-full object-cover transition duration-500 group-hover:scale-105"
               />
             </div>
 
             <div className="p-6 flex flex-col flex-grow">
               <h3 className="text-lg text-white transition-colors duration-300 group-hover:text-[#A6FF5D] text-left">
-                One-Click Deployment
+                Publish to Community
               </h3>
 
               <p className="text-sm text-neutral-400 font-light mt-3 text-left leading-relaxed">
-                Publish your fully responsive website instantly with optimized
-                performance and SEO built-in.
+                Publish your creations to the community, explore templates, and
+                remix designs.
               </p>
             </div>
           </motion.div>

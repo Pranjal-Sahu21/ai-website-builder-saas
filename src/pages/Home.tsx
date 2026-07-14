@@ -8,6 +8,7 @@ import StatsSection from "../components/StatsSection";
 import CTASection from "../components/CTASection";
 import { useSession } from "@/lib/auth-client";
 import SEO from "../components/SEO";
+import HowItWorks from "../components/HowItWorks";
 
 const Home = () => {
   const { data: session, isPending } = useSession();
@@ -51,6 +52,7 @@ const Home = () => {
         keywords="Genixor, AI website builder, instant landing pages, zero code generator, web design, responsive templates, React templates"
       />
       <HeroSection />
+      <HowItWorks />
       <Features />
       <Testimonials />
       <StatsSection />

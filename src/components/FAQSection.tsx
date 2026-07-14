@@ -45,8 +45,8 @@ const item = {
 
 
 
-const slideRightItem = {
-  hidden: { opacity: 0, x: 70 },
+const slideLeftItem = {
+  hidden: { opacity: 0, x: -70 },
   show: {
     opacity: 1,
     x: 0,
@@ -72,10 +72,10 @@ const FAQSection = () => {
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
         variants={container}
-        className="max-w-5xl mx-auto flex flex-col items-end w-full"
+        className="max-w-5xl mx-auto flex flex-col items-start w-full"
       >
         {/* Heading */}
-        <motion.h2 variants={slideRightItem} className="text-4xl md:text-5xl text-white tracking-tight text-center md:text-right font-light w-full">
+        <motion.h2 variants={slideLeftItem} className="text-4xl md:text-5xl text-white tracking-tight text-center md:text-left font-light w-full">
           Got Questions about{" "}
           <span className="text-[#A6FF5D] italic">Genixor?</span>
         </motion.h2>

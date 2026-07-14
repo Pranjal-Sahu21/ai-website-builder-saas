@@ -21,8 +21,8 @@ const item = {
   },
 };
 
-const slideLeftItem = {
-  hidden: { opacity: 0, x: -70 },
+const slideRightItem = {
+  hidden: { opacity: 0, x: 70 },
   show: {
     opacity: 1,
     x: 0,
@@ -74,10 +74,10 @@ const StatsSection = () => {
         className="max-w-6xl mx-auto flex flex-col items-start w-full"
       >
         {/* Heading */}
-        <div className="mb-12 w-full text-left">
+        <div className="mb-12 w-full flex flex-col items-center md:items-end text-center md:text-right">
           <motion.h2
-            variants={slideLeftItem}
-            className="text-white text-4xl md:text-5xl mt-6 tracking-tight text-center md:text-left font-light"
+            variants={slideRightItem}
+            className="text-white text-4xl md:text-5xl mt-6 tracking-tight text-center md:text-right font-light"
           >
             Genixor in <span className="text-[#A6FF5D] italic">Numbers</span>
           </motion.h2>

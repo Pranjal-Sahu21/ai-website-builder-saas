@@ -104,8 +104,8 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
-const slideRightItem = {
-  hidden: { opacity: 0, x: 70 },
+const slideLeftItem = {
+  hidden: { opacity: 0, x: -70 },
   show: {
     opacity: 1,
     x: 0,
@@ -124,10 +124,10 @@ const Testimonials = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className="relative max-w-6xl mx-auto text-center md:text-right px-4 sm:px-8 mb-16"
+        className="relative max-w-6xl mx-auto text-center md:text-left px-4 sm:px-8 mb-16"
       >
         {/* Heading */}
-        <motion.h2 variants={slideRightItem} className="text-white text-4xl md:text-5xl tracking-tight text-center md:text-right font-light">
+        <motion.h2 variants={slideLeftItem} className="text-white text-4xl md:text-5xl tracking-tight text-center md:text-left font-light">
           Trusted for <span className="text-[#A6FF5D] italic">Performance</span>
         </motion.h2>
       </motion.div>
