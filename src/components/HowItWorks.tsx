@@ -111,14 +111,11 @@ export default function HowItWorks() {
                   isWide ? "md:col-span-3" : "md:col-span-2"
                 }`}
               >
-                {/* SVG Dotted Grid Background */}
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] opacity-30 group-hover:opacity-50 transition-opacity duration-300 pointer-events-none" />
-
                 {/* Radial Accent Glow */}
                 <div className="absolute top-0 right-0 w-28 h-28 bg-[#A6FF5D]/5 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                 {/* Full Bleed Step Mockup Image */}
-                <div className={`overflow-hidden bg-black relative z-10 shrink-0 w-full aspect-[21/9] md:aspect-auto md:h-[280px] ${
+                <div className={`overflow-hidden bg-black relative z-10 shrink-0 w-full aspect-[16/10] md:aspect-auto md:h-[280px] ${
                   idx === 0 ? "px-4 pb-0 pt-0" : idx === 1 || idx === 2 ? "max-md:px-4 max-md:pb-0 max-md:pt-0" : ""
                 }`}>
                   <img
